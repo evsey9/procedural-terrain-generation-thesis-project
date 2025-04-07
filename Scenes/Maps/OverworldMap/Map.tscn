@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://7qafidkp0ity"]
+
+[ext_resource type="Script" uid="uid://b1xeefv7uxwqv" path="res://Scenes/Maps/OverworldMap/Map.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://barykacr4ui6t" path="res://Scenes/WorldGenerator/WorldGenerator.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://b352itia6p2vr" path="res://Scenes/WorldGridMap/WorldGridMap.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://bw43t3snwl0gm" path="res://Scenes/Characters/CameraPlayer/CameraPlayer.tscn" id="4_yk1ad"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yk1ad"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_yk1ad"]
+
+[sub_resource type="Sky" id="Sky_mj6o8"]
+sky_material = SubResource("PhysicalSkyMaterial_yk1ad")
+
+[sub_resource type="Environment" id="Environment_ut1c4"]
+background_mode = 2
+sky = SubResource("Sky_mj6o8")
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.690196, 0.729412, 0.811765, 1)
+fog_density = 1.0
+fog_height = 1024.0
+fog_depth_begin = 60.0
+fog_depth_end = 150.0
+
+[node name="World" type="Node3D"]
+script = ExtResource("1")
+
+[node name="WorldGenerator" parent="." instance=ExtResource("2")]
+gridmap = NodePath("../WorldGridMap")
+
+[node name="WorldGridMap" parent="." instance=ExtResource("3")]
+physics_material = SubResource("PhysicsMaterial_yk1ad")
+cell_octant_size = 4
+
+[node name="CameraPlayer" parent="." instance=ExtResource("4_yk1ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 84.141, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ut1c4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6.61169, 103.615, 9.64626)
+light_energy = 16.0
+sky_mode = 2

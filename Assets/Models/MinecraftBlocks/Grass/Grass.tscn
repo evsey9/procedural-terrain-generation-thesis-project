@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5l1h8c65qpya"]
+
+[ext_resource type="PackedScene" uid="uid://36qm1n7j4kil" path="res://Assets/Models/MinecraftBlocks/Grass/Grass.gltf" id="1"]
+
+[node name="Grass" index="0" instance=ExtResource("1")]

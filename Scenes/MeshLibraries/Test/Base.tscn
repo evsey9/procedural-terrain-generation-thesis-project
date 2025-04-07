@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://br6lxv6n4n3ic"]
+
+[ext_resource type="Texture2D" uid="uid://de1deckraqjrf" path="res://Assets/icon.png" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="2"]
+albedo_texture = ExtResource("1")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="1"]
+material = SubResource("2")
+
+[sub_resource type="ConvexPolygonShape3D" id="3"]
+points = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5)
+
+[node name="Scene Root" type="Spatial"]
+
+[node name="Godot" type="MeshInstance" parent="."]
+mesh = SubResource("1")
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Godot"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Godot/StaticBody"]
+shape = SubResource("3")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b352itia6p2vr"]
+
+[ext_resource type="MeshLibrary" path="res://Assets/MeshLibraries/Minecraft.meshlib" id="1"]
+[ext_resource type="Script" uid="uid://c7wiawwrjp52p" path="res://Scenes/WorldGridMap/WorldGridMap.gd" id="2"]
+
+[node name="WorldGridMap" type="GridMap" groups=["world_gridmap"]]
+mesh_library = ExtResource("1")
+cell_size = Vector3(1, 1, 1)
+cell_octant_size = 16
+script = ExtResource("2")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw43t3snwl0gm"]
+
+[ext_resource type="Script" uid="uid://cqd2nh82hj324" path="res://Scenes/Characters/CameraPlayer/camera_player.gd" id="1_4rdif"]
+
+[node name="CameraPlayer" type="CharacterBody3D" node_paths=PackedStringArray("camera") groups=["player"]]
+script = ExtResource("1_4rdif")
+sprint_multiplier = 5.0
+camera = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="."]
