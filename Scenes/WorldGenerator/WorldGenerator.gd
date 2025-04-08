@@ -24,6 +24,7 @@ var BASE_HEIGHT = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	return
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	noise.seed = randi()
 	noise.fractal_octaves = 12
@@ -49,8 +50,9 @@ func _ready():
 		$ChunkCheckTimer.start()
 
 func _physics_process(delta):
-	generator_instance.post_semaphore(1)
-	generate_chunks()
+	#generator_instance.post_semaphore(1)
+	#generate_chunks()
+	pass
 
 func _on_ChunkCheckTimer_timeout():
 	#generate_chunks()
@@ -109,4 +111,5 @@ func generate_chunks():
 
 
 func _on_ChunkGenTimer_timeout():
-	generator_instance.post_semaphore(2)
+	#generator_instance.post_semaphore(2)
+	pass

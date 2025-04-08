@@ -1,0 +1,13 @@
+[gd_resource type="ZN_FastNoiseLite" load_steps=2 format=3 uid="uid://cfi50grld6gur"]
+
+[sub_resource type="ZN_FastNoiseLiteGradient" id="ZN_FastNoiseLiteGradient_lfalr"]
+noise_type = 0
+period = 82.6001
+amplitude = 8.5001
+
+[resource]
+seed = 1337
+period = 512.0
+warp_noise = SubResource("ZN_FastNoiseLiteGradient_lfalr")
+fractal_octaves = 8
+fractal_lacunarity = 2.5

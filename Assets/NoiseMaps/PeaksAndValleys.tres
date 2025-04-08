@@ -1,0 +1,11 @@
+[gd_resource type="FastNoise2" format=3 uid="uid://t8bu2tmipm5l"]
+
+[resource]
+seed = 2402
+period = 15.5001
+fractal_type = 1
+fractal_octaves = 1
+cellular_distance_function = 2
+terrace_multiplier = 15.0
+remap_output_min = 1.0
+remap_output_max = 0.0

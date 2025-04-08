@@ -23,12 +23,12 @@ func initialize_game(): # Call when starting the game
 	get_tree().paused = true
 	if not in_game:
 		in_game = true
-		world_gridmap = get_tree().get_nodes_in_group("world_gridmap")[0]
+		#world_gridmap = get_tree().get_nodes_in_group("world_gridmap")[0]
 	get_tree().paused = false
 
 func pos_to_grid_pos(position: Vector3):
 	var gridpos = position
-	gridpos = gridpos / world_gridmap.cell_size
+	gridpos = gridpos / 1 #world_gridmap.cell_size
 	gridpos.x = int(floor(gridpos.x))
 	gridpos.y = int(floor(gridpos.y))
 	gridpos.z = int(floor(gridpos.z))

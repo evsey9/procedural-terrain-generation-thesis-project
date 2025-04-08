@@ -1,0 +1,8 @@
+[gd_resource type="ZN_FastNoiseLite" format=3 uid="uid://k1ptg7tk6a6r"]
+
+[resource]
+seed = 1337
+period = 512.0
+fractal_type = 0
+fractal_octaves = 8
+fractal_lacunarity = 2.5

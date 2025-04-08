@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://7qafidkp0ity"]
+[gd_scene load_steps=17 format=3 uid="uid://7qafidkp0ity"]
 
 [ext_resource type="Script" uid="uid://b1xeefv7uxwqv" path="res://Scenes/Maps/OverworldMap/Map.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://barykacr4ui6t" path="res://Scenes/WorldGenerator/WorldGenerator.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://b352itia6p2vr" path="res://Scenes/WorldGridMap/WorldGridMap.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://bw43t3snwl0gm" path="res://Scenes/Characters/CameraPlayer/CameraPlayer.tscn" id="4_yk1ad"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yk1ad"]
+[ext_resource type="VoxelBlockyModelCube" uid="uid://bglc46f5rflm3" path="res://Assets/VoxelBlockyModels/Stone.tres" id="5_mqpgb"]
+[ext_resource type="VoxelGeneratorScript" uid="uid://c7cvojig2t66" path="res://Source/VoxelGeneratorScripts/world_voxel_generator.tres" id="5_s105q"]
+[ext_resource type="VoxelBlockyModelCube" uid="uid://50emun8g00ec" path="res://Assets/VoxelBlockyModels/Grass.tres" id="6_s105q"]
+[ext_resource type="Material" uid="uid://b43g1h0qcu3bm" path="res://Assets/Materials/Blocks/Base.tres" id="7_1qvxm"]
+[ext_resource type="Material" uid="uid://cvbgf63oaxwqv" path="res://Assets/Materials/Blocks/Water.tres" id="8_1qvxm"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_yk1ad"]
 
@@ -15,23 +16,39 @@ sky_material = SubResource("PhysicalSkyMaterial_yk1ad")
 [sub_resource type="Environment" id="Environment_ut1c4"]
 background_mode = 2
 sky = SubResource("Sky_mj6o8")
+ssr_enabled = true
+ssao_enabled = true
+glow_enabled = true
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.690196, 0.729412, 0.811765, 1)
 fog_density = 1.0
 fog_height = 1024.0
-fog_depth_begin = 60.0
-fog_depth_end = 150.0
+fog_depth_begin = 350.0
+fog_depth_end = 390.0
+volumetric_fog_density = 0.0
+
+[sub_resource type="VoxelBlockyModelEmpty" id="VoxelBlockyModelEmpty_s105q"]
+
+[sub_resource type="VoxelBlockyFluid" id="VoxelBlockyFluid_mqpgb"]
+material = ExtResource("8_1qvxm")
+
+[sub_resource type="VoxelBlockyModelFluid" id="VoxelBlockyModelFluid_s105q"]
+transparency_index = 255
+fluid = SubResource("VoxelBlockyFluid_mqpgb")
+level = 255
+
+[sub_resource type="VoxelBlockyLibrary" id="VoxelBlockyLibrary_s105q"]
+models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_s105q"), ExtResource("5_mqpgb"), ExtResource("6_s105q"), SubResource("VoxelBlockyModelFluid_s105q")])
+
+[sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_1qvxm"]
+library = SubResource("VoxelBlockyLibrary_s105q")
+
+[sub_resource type="BoxMesh" id="BoxMesh_7dm1u"]
+material = ExtResource("7_1qvxm")
 
 [node name="World" type="Node3D"]
 script = ExtResource("1")
-
-[node name="WorldGenerator" parent="." instance=ExtResource("2")]
-gridmap = NodePath("../WorldGridMap")
-
-[node name="WorldGridMap" parent="." instance=ExtResource("3")]
-physics_material = SubResource("PhysicsMaterial_yk1ad")
-cell_octant_size = 4
 
 [node name="CameraPlayer" parent="." instance=ExtResource("4_yk1ad")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 84.141, 0)
@@ -43,3 +60,14 @@ environment = SubResource("Environment_ut1c4")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6.61169, 103.615, 9.64626)
 light_energy = 16.0
 sky_mode = 2
+
+[node name="VoxelTerrain" type="VoxelTerrain" parent="."]
+generator = ExtResource("5_s105q")
+mesher = SubResource("VoxelMesherBlocky_1qvxm")
+max_view_distance = 512
+run_stream_in_editor = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 65.1005, 0)
+visible = false
+mesh = SubResource("BoxMesh_7dm1u")

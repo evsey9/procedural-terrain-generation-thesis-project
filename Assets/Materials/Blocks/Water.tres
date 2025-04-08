@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cvbgf63oaxwqv"]
+
+[ext_resource type="Texture2D" uid="uid://50d07yl2r8a1" path="res://Assets/Textures/MinecraftBlocks/Water.png" id="1_0gjnk"]
+
+[resource]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.517647)
+albedo_texture = ExtResource("1_0gjnk")
+metallic_specular = 0.0
+subsurf_scatter_strength = 1.0
+refraction_scale = 1.0
+refraction_texture = ExtResource("1_0gjnk")
+refraction_texture_channel = 2
+texture_filter = 2

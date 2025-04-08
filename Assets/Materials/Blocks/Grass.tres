@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://qnvvbtoypell"]
+
+[ext_resource type="Texture2D" uid="uid://cltr2gkg5n726" path="res://Assets/Textures/MinecraftBlocks/grass.png" id="1_06gan"]
+
+[resource]
+albedo_texture = ExtResource("1_06gan")
+texture_filter = 2

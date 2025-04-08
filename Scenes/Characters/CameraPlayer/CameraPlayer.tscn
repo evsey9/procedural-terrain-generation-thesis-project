@@ -6,5 +6,24 @@
 script = ExtResource("1_4rdif")
 sprint_multiplier = 5.0
 camera = NodePath("Camera3D")
+UPDATE_ON_PHYSICS = false
 
 [node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="VoxelViewer" type="VoxelViewer" parent="."]
+view_distance = 400
+requires_collisions = false
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CoordinateLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_right = 215.0
+offset_bottom = 51.0

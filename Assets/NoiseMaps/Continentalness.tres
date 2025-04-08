@@ -1,0 +1,8 @@
+[gd_resource type="FastNoise2" format=3 uid="uid://dtrhet44bdifq"]
+
+[resource]
+period = 1024.0
+fractal_type = 1
+fractal_octaves = 8
+fractal_lacunarity = 2.5
+terrace_multiplier = 15.0

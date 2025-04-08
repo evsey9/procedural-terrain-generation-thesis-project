@@ -1,0 +1,62 @@
+[gd_resource type="VoxelGeneratorGraph" load_steps=2 format=3 uid="uid://bj1x0k3l7idv6"]
+
+[ext_resource type="VoxelGraphFunction" uid="uid://crrwsge5wppim" path="res://Source/VoxelGraphFunctions/heightmap_voxel_graph_function.tres" id="2_fsx67"]
+
+[resource]
+graph_data = {
+"connections": [[1, 0, 16, 0], [2, 0, 28, 0], [3, 0, 16, 1], [16, 0, 28, 1], [16, 0, 29, 0], [8, 0, 7, 0], [8, 0, 23, 0], [28, 0, 8, 2]],
+"nodes": {
+"1": {
+"gui_position": Vector2(440, 60),
+"type": "InputX"
+},
+"16": {
+"_function": ExtResource("2_fsx67"),
+"auto_connect": true,
+"gui_position": Vector2(620, -120),
+"type": "Function",
+"x": 0.0,
+"z": 0.0
+},
+"2": {
+"gui_position": Vector2(440, 460),
+"type": "InputY"
+},
+"23": {
+"fraction_period": 10.0,
+"gui_position": Vector2(1200, -180),
+"max_value": 1.0,
+"min_value": -1.0,
+"mode": 1,
+"type": "SdfPreview"
+},
+"28": {
+"gui_position": Vector2(960, 80),
+"type": "Subtract"
+},
+"29": {
+"fraction_period": 10.0,
+"gui_position": Vector2(940, -160),
+"max_value": 1.0,
+"min_value": -1.0,
+"mode": 0,
+"type": "SdfPreview"
+},
+"3": {
+"gui_position": Vector2(440, 220),
+"type": "InputZ"
+},
+"7": {
+"gui_position": Vector2(1400, 20),
+"type": "OutputType"
+},
+"8": {
+"a": 1.0,
+"b": 0.0,
+"gui_position": Vector2(1200, 20),
+"threshold": 0.0,
+"type": "Select"
+}
+},
+"version": 2
+}
