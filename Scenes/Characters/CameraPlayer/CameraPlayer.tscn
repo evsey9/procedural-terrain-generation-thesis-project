@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bw43t3snwl0gm"]
+[gd_scene load_steps=3 format=3 uid="uid://bw43t3snwl0gm"]
 
 [ext_resource type="Script" uid="uid://cqd2nh82hj324" path="res://Scenes/Characters/CameraPlayer/camera_player.gd" id="1_4rdif"]
+[ext_resource type="PackedScene" uid="uid://yr4uj7vt86sl" path="res://Scenes/UI/PlayerUI/player_ui.tscn" id="2_5wmd6"]
 
 [node name="CameraPlayer" type="CharacterBody3D" node_paths=PackedStringArray("camera") groups=["player"]]
 script = ExtResource("1_4rdif")
@@ -11,10 +12,10 @@ UPDATE_ON_PHYSICS = false
 [node name="Camera3D" type="Camera3D" parent="."]
 
 [node name="VoxelViewer" type="VoxelViewer" parent="."]
-view_distance = 400
+view_distance = 352
 requires_collisions = false
 
-[node name="UI" type="Control" parent="."]
+[node name="HUD" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +24,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CoordinateLabel" type="Label" parent="UI"]
+[node name="CoordinateLabel" type="Label" parent="HUD"]
 layout_mode = 0
 offset_right = 215.0
 offset_bottom = 51.0
+
+[node name="PlayerUI" parent="." instance=ExtResource("2_5wmd6")]

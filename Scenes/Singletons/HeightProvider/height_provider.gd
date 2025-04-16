@@ -23,8 +23,7 @@ var heightmap_range := 0
 #var heightmap_noise : ZN_FastNoiseLite = preload("res://Assets/NoiseMaps/ContinentalnessLiteNoWarp.tres")
 var heightmap_noise : ZN_FastNoiseLite = preload("res://Assets/NoiseMaps/ContinentalnessLite.tres")
 #var heightmap_noise : ZN_FastNoiseLite = preload("res://Assets/NoiseMaps/ContinentalnessLiteNoFractal.tres")
-var trees_min_y := 0
-var trees_max_y := 0
+
 
 func _init():
 	# TODO Even this must be based on a seed, but I'm lazy
@@ -38,6 +37,9 @@ func _init():
 
 
 func get_height_at(x: int, z: int) -> int:
-	heightmap_range = heightmap_max_y - heightmap_min_y
-	var t = 0.5 + 0.5 * heightmap_noise.get_noise_2d(x, z)
-	return int(ContinentalnessHeightmapCurve.sample_baked(t) * heightmap_range) + heightmap_min_y
+	#heightmap_range = heightmap_max_y - heightmap_min_y
+	#var t = 0.5 + 0.5 * heightmap_noise.get_noise_2d(x, z)
+	#var b : Image = ContinentalnessHeightmapProvider.get_image()
+	#var c = b.get_format()
+	#var k = ImageFunctions.convert_to_matrix(b)
+	return int(ContinentalnessHeightmapProvider.get_value_at(x, z) * WorldGenerationSettings.heightmap_range) + WorldGenerationSettings.heightmap_min_y

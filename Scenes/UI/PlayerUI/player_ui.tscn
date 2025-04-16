@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://yr4uj7vt86sl"]
+
+[ext_resource type="Script" uid="uid://cfki7qnn0emo3" path="res://Scenes/UI/PlayerUI/player_ui.gd" id="1_3qnj2"]
+[ext_resource type="PackedScene" uid="uid://dey7vu57iaonp" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/Continentalness/continentalness_heightmap_provider_display.tscn" id="2_3y35k"]
+[ext_resource type="PackedScene" uid="uid://b8gj0brr3ncb3" path="res://Scenes/UI/PlayerUI/WorldGenerationSettingsDisplay/world_generation_settings_display.tscn" id="2_ii7ti"]
+
+[node name="PlayerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3qnj2")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="WorldGenerationSettingsDisplay" parent="Control/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_ii7ti")]
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="ContinentalnessHeightmapProviderDisplay" parent="Control/Panel/ScrollContainer/VBoxContainer" groups=["heightmap_provider_displays"] instance=ExtResource("2_3y35k")]
+layout_mode = 2
+size_flags_horizontal = 1

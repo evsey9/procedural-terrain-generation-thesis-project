@@ -1,0 +1,198 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8gj0brr3ncb3"]
+
+[ext_resource type="Script" uid="uid://b8d60dmpi5g23" path="res://Scenes/UI/PlayerUI/WorldGenerationSettingsDisplay/world_generation_settings_display.gd" id="1_fmpic"]
+[ext_resource type="Script" uid="uid://cfb5thqjiy2j5" path="res://addons/tnowe_extra_controls/elements/properties_box.gd" id="2_xs6u3"]
+[ext_resource type="Script" uid="uid://b1l0ybaco5mjl" path="res://Source/Libraries/curve_editor.gd" id="3_6q7t7"]
+[ext_resource type="Theme" uid="uid://c3778lnlhqkpv" path="res://Assets/Themes/CurveEditorTheme.tres" id="3_xs6u3"]
+
+[sub_resource type="Gradient" id="Gradient_i6yqe"]
+offsets = PackedFloat32Array(0, 0.25, 0.440789, 0.648026, 0.842105, 1)
+colors = PackedColorArray(0.871861, 0.426852, 0, 1, 0.522752, 0.281634, 0, 1, 0.79194, 0.519324, 0.428981, 1, 0.902212, 0.343114, 0.122737, 1, 0.889658, 0.329128, 0.127409, 1, 0.721066, 0.141324, 0.19015, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_34jjg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aa5tn"]
+color_ramp = SubResource("Gradient_i6yqe")
+noise = SubResource("FastNoiseLite_34jjg")
+
+[node name="WorldGenerationSettingsDisplay" type="Control" groups=["world_generation_settings_display"]]
+custom_minimum_size = Vector2(1182, 840)
+layout_mode = 3
+anchor_right = 0.893229
+anchor_bottom = 0.872222
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_fmpic")
+metadata/_edit_use_anchors_ = true
+
+[node name="NoiseTextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.402763
+anchor_bottom = 0.402763
+offset_top = -256.0
+offset_right = 512.0
+offset_bottom = 256.0
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_aa5tn")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 0.107497
+offset_right = 0.453979
+offset_bottom = -0.405014
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 56
+text = "World Generation Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ScaleSliderControl" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.314869
+anchor_top = 0.130712
+anchor_right = 0.597095
+anchor_bottom = 0.718257
+offset_right = -0.0180664
+offset_bottom = 0.119934
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleSliderControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScaleSliderControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="ScaleSliderControl/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 46
+text = "Reset"
+
+[node name="BakeButton" type="Button" parent="ScaleSliderControl/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 46
+text = "Bake Curves"
+
+[node name="PropertiesBox" type="VBoxContainer" parent="ScaleSliderControl/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("2_xs6u3")
+metadata/_custom_type_script = "uid://cfb5thqjiy2j5"
+
+[node name="CurveControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchor_left = 0.611079
+anchor_top = 0.130712
+anchor_right = 0.910314
+anchor_bottom = 1.00034
+offset_right = -0.188004
+offset_bottom = -0.32
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CurveControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CurveControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FirstCurveControl" type="Control" parent="CurveControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CurveControl/HBoxContainer/VBoxContainer/FirstCurveControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CurveLabel" type="Label" parent="CurveControl/HBoxContainer/VBoxContainer/FirstCurveControl/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Curve"
+horizontal_alignment = 1
+
+[node name="CurveEditor" type="Control" parent="CurveControl/HBoxContainer/VBoxContainer/FirstCurveControl/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+theme = ExtResource("3_xs6u3")
+script = ExtResource("3_6q7t7")
+
+[node name="SecondCurveControl" type="Control" parent="CurveControl/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CurveControl/HBoxContainer/VBoxContainer/SecondCurveControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CurveLabel" type="Label" parent="CurveControl/HBoxContainer/VBoxContainer/SecondCurveControl/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Contribution"
+horizontal_alignment = 1
+
+[node name="CurveEditor" type="Control" parent="CurveControl/HBoxContainer/VBoxContainer/SecondCurveControl/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+theme = ExtResource("3_xs6u3")
+script = ExtResource("3_6q7t7")
+
+[node name="RotatedLabelNode" type="Control" parent="CurveControl/HBoxContainer"]
+layout_mode = 2
+
+[node name="CurvesUnbakedWarning" type="Label" parent="CurveControl/HBoxContainer/RotatedLabelNode"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -124.495
+offset_right = 406.0
+offset_bottom = -36.495
+grow_vertical = 2
+rotation = 1.5708
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 64
+text = "UNBAKED"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="ScaleSliderControl/VBoxContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="ScaleSliderControl/VBoxContainer/HBoxContainer/BakeButton" to="." method="_on_bake_button_pressed"]
+[connection signal="number_changed" from="ScaleSliderControl/VBoxContainer/PropertiesBox" to="." method="_on_properties_box_number_changed"]
+[connection signal="value_changed" from="ScaleSliderControl/VBoxContainer/PropertiesBox" to="." method="_on_properties_box_value_changed"]
+[connection signal="curve_changed" from="CurveControl/HBoxContainer/VBoxContainer/FirstCurveControl/VBoxContainer/CurveEditor" to="." method="_on_curve_editor_curve_changed"]
+[connection signal="curve_changed" from="CurveControl/HBoxContainer/VBoxContainer/SecondCurveControl/VBoxContainer/CurveEditor" to="." method="_on_contribution_curve_editor_curve_changed"]

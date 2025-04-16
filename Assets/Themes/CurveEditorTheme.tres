@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c3778lnlhqkpv"]
+
+[sub_resource type="SystemFont" id="SystemFont_xqjhv"]
+
+[resource]
+default_font = SubResource("SystemFont_xqjhv")
+Editor/colors/accent_color = Color(0.647059, 0, 0, 1)
+Editor/colors/axis_x_color = Color(0.796078, 0, 0, 1)
+Editor/colors/axis_y_color = Color(0, 0.690196, 0, 1)
+Editor/colors/font_color = Color(0.8, 0.8, 0.8, 1)
+Editor/colors/mono_color = Color(0.67069, 0.67069, 0.67069, 1)
+Label/colors/font_color = Color(0.967836, 0.985385, 1, 1)
+Label/colors/font_outline_color = Color(0.811306, 0.530802, 0.808534, 1)
+Label/colors/name = Color(0.683553, 0.550581, 0.845518, 1)
+theme/colors/mono_color = Color(1, 1, 1, 1)
