@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw43t3snwl0gm"]
+[gd_scene load_steps=4 format=3 uid="uid://bw43t3snwl0gm"]
 
 [ext_resource type="Script" uid="uid://cqd2nh82hj324" path="res://Scenes/Characters/CameraPlayer/camera_player.gd" id="1_4rdif"]
 [ext_resource type="PackedScene" uid="uid://yr4uj7vt86sl" path="res://Scenes/UI/PlayerUI/player_ui.tscn" id="2_5wmd6"]
+
+[sub_resource type="Curve" id="Curve_5wmd6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.357988, 0.497069), 0.0, 0.0, 0, 0, Vector2(0.662722, 0.184642), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [node name="CameraPlayer" type="CharacterBody3D" node_paths=PackedStringArray("camera") groups=["player"]]
 script = ExtResource("1_4rdif")
@@ -29,4 +33,42 @@ layout_mode = 0
 offset_right = 215.0
 offset_bottom = 51.0
 
+[node name="Control" type="Control" parent="HUD"]
+visible = false
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 1
+anchor_top = 0.915
+anchor_right = 0.048
+anchor_bottom = 1.0
+offset_top = 51.8
+offset_right = -52.16
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.231373)
+metadata/_edit_use_anchors_ = true
+
+[node name="Line" type="Control" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line2D" type="Line2D" parent="HUD/Control/Line"]
+points = PackedVector2Array(0, 0, 0, -46)
+width = 8.0
+width_curve = SubResource("Curve_5wmd6")
+default_color = Color(1, 0, 0, 1)
+
 [node name="PlayerUI" parent="." instance=ExtResource("2_5wmd6")]
+visible = false

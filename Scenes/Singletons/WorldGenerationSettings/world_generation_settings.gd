@@ -13,6 +13,10 @@ var heightmap_range : int :
 	get:
 		return heightmap_max_y - heightmap_min_y
 
+var sea_level_ratio : float : 
+	get:
+		return float(sea_level_y - heightmap_min_y) / float(heightmap_range)
+
 var horizontal_scale := default_horizontal_scale
 
 var default_trees_min_y := 0
@@ -21,6 +25,8 @@ var default_trees_max_y := 0
 var trees_min_y := default_trees_min_y
 var trees_max_y := default_trees_max_y
 
+signal settings_changed
+
 func reset():
 	sea_level_y = default_sea_level_y
 	heightmap_min_y = default_heightmap_min_y
@@ -28,3 +34,6 @@ func reset():
 	horizontal_scale = default_horizontal_scale
 	trees_min_y = default_trees_min_y
 	trees_max_y = default_trees_max_y
+
+func change_settings() -> void:
+	settings_changed.emit()

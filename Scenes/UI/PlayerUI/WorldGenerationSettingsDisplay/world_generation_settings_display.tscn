@@ -10,8 +10,15 @@ offsets = PackedFloat32Array(0, 0.25, 0.440789, 0.648026, 0.842105, 1)
 colors = PackedColorArray(0.871861, 0.426852, 0, 1, 0.522752, 0.281634, 0, 1, 0.79194, 0.519324, 0.428981, 1, 0.902212, 0.343114, 0.122737, 1, 0.889658, 0.329128, 0.127409, 1, 0.721066, 0.141324, 0.19015, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_34jjg"]
+frequency = 0.0153
+offset = Vector3(-97.76, -757.02, 0)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aa5tn"]
+width = 256
+height = 256
+generate_mipmaps = false
+bump_strength = 9.5
+normalize = false
 color_ramp = SubResource("Gradient_i6yqe")
 noise = SubResource("FastNoiseLite_34jjg")
 
@@ -27,17 +34,40 @@ size_flags_horizontal = 4
 script = ExtResource("1_fmpic")
 metadata/_edit_use_anchors_ = true
 
-[node name="NoiseTextureRect" type="TextureRect" parent="."]
+[node name="NoiseTextureControl" type="Control" parent="."]
+custom_minimum_size = Vector2(512, 512)
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.402763
-anchor_bottom = 0.402763
-offset_top = -256.0
-offset_right = 512.0
-offset_bottom = 256.0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_right = 0.555004
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="NoiseTextureControl"]
+z_index = 1
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.47451)
+
+[node name="NoiseTextureRect" type="TextureRect" parent="NoiseTextureControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("NoiseTexture2D_aa5tn")
-metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

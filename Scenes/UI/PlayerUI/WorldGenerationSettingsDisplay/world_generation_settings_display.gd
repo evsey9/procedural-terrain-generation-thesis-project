@@ -1,7 +1,7 @@
 class_name WorldGenerationSettingsDisplay
 extends Control
 
-@onready var noise_texture_rect : TextureRect = $NoiseTextureRect
+@onready var noise_texture_rect : TextureRect = $NoiseTextureControl/NoiseTextureRect
 @onready var properties_box : PropertiesBox = $ScaleSliderControl/VBoxContainer/PropertiesBox
 @onready var curve_editor : CurveEditor = $CurveControl/HBoxContainer/VBoxContainer/FirstCurveControl/VBoxContainer/CurveEditor
 @onready var contribution_curve_editor : CurveEditor = $CurveControl/HBoxContainer/VBoxContainer/SecondCurveControl/VBoxContainer/CurveEditor
@@ -51,6 +51,7 @@ func _on_properties_box_number_changed(key: StringName, new_value: float) -> voi
 		_:
 			pass
 	properties_changed()
+	WorldGenerationSettings.change_settings()
 
 
 func get_new_noise_texture() -> void:
@@ -84,4 +85,7 @@ func _on_bake_button_pressed() -> void:
 	$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.hide()
 
 func properties_changed() -> void:
+	get_new_noise_texture()
+
+func children_heightmap_properties_changed() -> void:
 	get_new_noise_texture()

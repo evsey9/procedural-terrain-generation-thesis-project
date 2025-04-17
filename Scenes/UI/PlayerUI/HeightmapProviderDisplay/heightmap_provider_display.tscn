@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" uid="uid://bpb7wntmxisb5" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/heightmap_provider_display.gd" id="1_i6yqe"]
 [ext_resource type="Script" uid="uid://cfb5thqjiy2j5" path="res://addons/tnowe_extra_controls/elements/properties_box.gd" id="2_34jjg"]
+[ext_resource type="Shader" uid="uid://c4pslhgv50ppb" path="res://Source/Shaders/heightmap_display.gdshader" id="2_eg7dd"]
 [ext_resource type="Theme" uid="uid://c3778lnlhqkpv" path="res://Assets/Themes/CurveEditorTheme.tres" id="3_1sgno"]
 [ext_resource type="Script" uid="uid://b1l0ybaco5mjl" path="res://Source/Libraries/curve_editor.gd" id="3_xqjhv"]
 
-[sub_resource type="Gradient" id="Gradient_i6yqe"]
-offsets = PackedFloat32Array(0, 0.25, 0.440789, 0.648026, 0.842105, 1)
-colors = PackedColorArray(0.871861, 0.426852, 0, 1, 0.522752, 0.281634, 0, 1, 0.79194, 0.519324, 0.428981, 1, 0.902212, 0.343114, 0.122737, 1, 0.889658, 0.329128, 0.127409, 1, 0.721066, 0.141324, 0.19015, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_otqfj"]
+shader = ExtResource("2_eg7dd")
+shader_parameter/scale = 0.0
+shader_parameter/power = 0.0
+shader_parameter/sea_level_value = 0.5
+shader_parameter/rotation = 0.0
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_34jjg"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aa5tn"]
-color_ramp = SubResource("Gradient_i6yqe")
-noise = SubResource("FastNoiseLite_34jjg")
+[sub_resource type="CanvasTexture" id="CanvasTexture_otqfj"]
 
 [node name="HeightmapProviderDisplay" type="Control"]
 custom_minimum_size = Vector2(1182, 840)
@@ -27,17 +27,44 @@ size_flags_horizontal = 4
 script = ExtResource("1_i6yqe")
 metadata/_edit_use_anchors_ = true
 
-[node name="NoiseTextureRect" type="TextureRect" parent="."]
+[node name="NoiseTextureControl" type="Control" parent="."]
+custom_minimum_size = Vector2(512, 512)
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.402763
-anchor_bottom = 0.402763
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
 offset_top = -256.0
 offset_right = 512.0
 offset_bottom = 256.0
 grow_vertical = 2
-texture = SubResource("NoiseTexture2D_aa5tn")
-metadata/_edit_use_anchors_ = true
+
+[node name="NoiseTextureRect" type="TextureRect" parent="NoiseTextureControl"]
+material = SubResource("ShaderMaterial_otqfj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_otqfj")
+expand_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="NoiseTextureControl"]
+z_index = 1
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.47451)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
