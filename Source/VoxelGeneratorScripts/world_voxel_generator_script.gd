@@ -21,10 +21,10 @@ func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int) 
 
 	# Ground
 
-	if origin_in_voxels.y > WorldGenerationSettings.heightmap_max_y:
+	if origin_in_voxels.y > WorldGenerationSettings.HeightmapMaxY:
 		buffer.fill(AIR, _CHANNEL)
 
-	elif origin_in_voxels.y + block_size < WorldGenerationSettings.heightmap_min_y:
+	elif origin_in_voxels.y + block_size < WorldGenerationSettings.HeightmapMinY:
 		buffer.fill(STONE, _CHANNEL)
 
 	else:
@@ -48,7 +48,7 @@ func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int) 
 				elif relative_height > 0:
 					buffer.fill_area(STONE,
 						Vector3(x, 0, z), Vector3(x + 1, relative_height, z + 1), _CHANNEL)
-					if height >= WorldGenerationSettings.sea_level_y:
+					if height >= WorldGenerationSettings.SeaLevelY:
 						buffer.set_voxel(GRASS, x, relative_height - 1, z, _CHANNEL)
 						if relative_height < block_size and rng.randf() < 0.2:
 							pass
@@ -58,14 +58,14 @@ func _generate_block(buffer: VoxelBuffer, origin_in_voxels: Vector3i, lod: int) 
 							#buffer.set_voxel(foliage, x, relative_height, z, _CHANNEL)
 				
 				# Water
-				if height < WorldGenerationSettings.sea_level_y and origin_y < WorldGenerationSettings.sea_level_y:
+				if height < WorldGenerationSettings.SeaLevelY and origin_y < WorldGenerationSettings.SeaLevelY:
 					var start_relative_height := 0
 					if relative_height > 0:
 						start_relative_height = relative_height
 					buffer.fill_area(WATER_FULL,
 						Vector3(x, start_relative_height, z), 
 						Vector3(x + 1, block_size, z + 1), _CHANNEL)
-					if origin_y + block_size == WorldGenerationSettings.sea_level_y:
+					if origin_y + block_size == WorldGenerationSettings.SeaLevelY:
 						# Surface block TODO fix
 						buffer.set_voxel(WATER_FULL, x, block_size - 1, z, _CHANNEL)
 						
@@ -83,7 +83,7 @@ static func _get_chunk_seed_2d(cpos: Vector3) -> int:
 func _get_height_at(x: int, z: int) -> int:
 	#var t = 0.5 + 0.5 * _heightmap_noise.get_noise_2d(x, z)
 	#return int(HeightmapCurve.sample_baked(t))
-	return WorldHeightmapProvider.get_height_at(x, z)
+	return WorldHeightmapProvider.GetHeightAt(x, z)
 
 func _get_used_channels_mask() -> int:
 	return 1 << _CHANNEL

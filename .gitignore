@@ -2,3 +2,6 @@
 .godot/
 /android/
 /NotGameAssets
+
+.idea/
+/Procedural Terrain Generation Thesis Project.sln.DotSettings.user

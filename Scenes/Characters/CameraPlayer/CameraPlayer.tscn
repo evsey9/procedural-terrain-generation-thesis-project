@@ -1,17 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://bw43t3snwl0gm"]
 
-[ext_resource type="Script" uid="uid://cqd2nh82hj324" path="res://Scenes/Characters/CameraPlayer/camera_player.gd" id="1_4rdif"]
+[ext_resource type="Script" uid="uid://dr2ygy5ia7k8a" path="res://Scenes/Characters/CameraPlayer/CameraPlayer.cs" id="1_5wmd6"]
 [ext_resource type="PackedScene" uid="uid://yr4uj7vt86sl" path="res://Scenes/UI/PlayerUI/player_ui.tscn" id="2_5wmd6"]
 
 [sub_resource type="Curve" id="Curve_5wmd6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.357988, 0.497069), 0.0, 0.0, 0, 0, Vector2(0.662722, 0.184642), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[node name="CameraPlayer" type="CharacterBody3D" node_paths=PackedStringArray("camera") groups=["player"]]
-script = ExtResource("1_4rdif")
-sprint_multiplier = 5.0
-camera = NodePath("Camera3D")
-UPDATE_ON_PHYSICS = false
+[node name="CameraPlayer" type="CharacterBody3D" node_paths=PackedStringArray("Hud", "PlayerUi", "Camera") groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_5wmd6")
+Hud = NodePath("HUD")
+PlayerUi = NodePath("PlayerUI")
+SprintMultiplier = 5.0
+MouseAccelerationEnabled = false
+Camera = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 

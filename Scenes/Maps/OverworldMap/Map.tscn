@@ -1,6 +1,5 @@
-[gd_scene load_steps=17 format=3 uid="uid://7qafidkp0ity"]
+[gd_scene load_steps=16 format=3 uid="uid://7qafidkp0ity"]
 
-[ext_resource type="Script" uid="uid://b1xeefv7uxwqv" path="res://Scenes/Maps/OverworldMap/Map.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bw43t3snwl0gm" path="res://Scenes/Characters/CameraPlayer/CameraPlayer.tscn" id="4_yk1ad"]
 [ext_resource type="VoxelBlockyModelCube" uid="uid://bglc46f5rflm3" path="res://Assets/VoxelBlockyModels/Stone.tres" id="5_mqpgb"]
 [ext_resource type="VoxelGeneratorScript" uid="uid://c7cvojig2t66" path="res://Source/VoxelGeneratorScripts/world_voxel_generator.tres" id="5_s105q"]
@@ -48,11 +47,6 @@ library = SubResource("VoxelBlockyLibrary_s105q")
 material = ExtResource("7_1qvxm")
 
 [node name="World" type="Node3D"]
-script = ExtResource("1")
-
-[node name="CameraPlayer" parent="." instance=ExtResource("4_yk1ad")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 84.141, 0)
-sprint_multiplier = 7.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ut1c4")
@@ -72,3 +66,6 @@ run_stream_in_editor = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 65.1005, 0)
 visible = false
 mesh = SubResource("BoxMesh_7dm1u")
+
+[node name="CameraPlayer" parent="." instance=ExtResource("4_yk1ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 84, 0)

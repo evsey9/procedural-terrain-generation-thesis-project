@@ -1,4 +1,4 @@
-extends "res://addons/Free fly camera/Src/free_fly_startup.gd"
+extends CameraMovementOld
 
 @onready var hud : Control = $HUD
 @onready var player_ui : PlayerUI = $PlayerUI

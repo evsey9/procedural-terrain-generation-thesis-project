@@ -1,4 +1,4 @@
-extends HeightmapProvider
+extends HeightmapProviderOld
 
 func _init():
 	default_noise = null

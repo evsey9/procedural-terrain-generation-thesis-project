@@ -15,15 +15,15 @@ func _ready() -> void:
 func setup_properties() -> void:
 	properties_box.clear()
 	properties_box.add_group("Base")
-	properties_box.add_float("Horizontal Scale", WorldGenerationSettings.horizontal_scale, 0.00001, 10, 0.01)
-	properties_box.add_float("Sea Level Height", WorldGenerationSettings.sea_level_y, -512, 512, 16)
-	properties_box.add_int("Heightmap Min Level", WorldGenerationSettings.heightmap_min_y, -512, 512)
-	properties_box.add_int("Heightmap Max Level", WorldGenerationSettings.heightmap_max_y, -512, 512)
+	properties_box.add_float("Horizontal Scale", WorldGenerationSettings.HorizontalScale, 0.00001, 10, 0.01)
+	properties_box.add_float("Sea Level Height", WorldGenerationSettings.SeaLevelY, -512, 512, 16)
+	properties_box.add_int("Heightmap Min Level", WorldGenerationSettings.HeightmapMinY, -512, 512)
+	properties_box.add_int("Heightmap Max Level", WorldGenerationSettings.HeightmapMaxY, -512, 512)
 	properties_box.end_group()
 
 func setup_curves() -> void:
-	curve_editor.set_curve(ContinentalnessHeightmapProvider.preview_curve)
-	contribution_curve_editor.set_curve(ContinentalnessHeightmapProvider.preview_contribution_curve)
+	curve_editor.set_curve(ContinentalnessHeightmapProvider.PreviewCurve)
+	contribution_curve_editor.set_curve(ContinentalnessHeightmapProvider.PreviewContributionCurve)
 	$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.hide()
 
 func _on_player_ui_enabled() -> void:
@@ -41,17 +41,17 @@ func _on_properties_box_value_changed(key: StringName, new_value: Variant) -> vo
 func _on_properties_box_number_changed(key: StringName, new_value: float) -> void:
 	match key:
 		"Horizontal Scale":
-			WorldGenerationSettings.horizontal_scale = new_value
+			WorldGenerationSettings.HorizontalScale = new_value
 		"Sea Level Height":
-			WorldGenerationSettings.sea_level_y = int(new_value)
+			WorldGenerationSettings.SeaLevelY = int(new_value)
 		"Heightmap Min Level":
-			WorldGenerationSettings.heightmap_min_y = int(new_value)
+			WorldGenerationSettings.HeightmapMinY = int(new_value)
 		"Heightmap Max Level":
-			WorldGenerationSettings.heightmap_max_y = int(new_value)
+			WorldGenerationSettings.HeightmapMaxY = int(new_value)
 		_:
 			pass
 	properties_changed()
-	WorldGenerationSettings.change_settings()
+	WorldGenerationSettings.ChangeSettings()
 
 
 func get_new_noise_texture() -> void:
@@ -63,7 +63,7 @@ func _on_reset_button_pressed() -> void:
 	reset.call_deferred()
 
 func reset():
-	WorldGenerationSettings.reset()
+	WorldGenerationSettings.Reset(true)
 	for heightmap_provider_display in get_tree().get_nodes_in_group("heightmap_provider_displays"):
 		heightmap_provider_display.reset()
 	setup_properties()

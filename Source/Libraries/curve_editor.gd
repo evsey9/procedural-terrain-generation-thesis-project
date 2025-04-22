@@ -67,7 +67,8 @@ func get_data() -> Curve:
 	return _curve
 	
 func set_curve(curve: Curve):
-	_curve.changed.disconnect(_on_core_curve_changed)
+	if _curve != null and _curve.has_connections("changed"):
+		_curve.changed.disconnect(_on_core_curve_changed)
 	_curve = curve
 	_curve.changed.connect(_on_core_curve_changed)
 	queue_redraw()
