@@ -7,11 +7,13 @@
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.357988, 0.497069), 0.0, 0.0, 0, 0, Vector2(0.662722, 0.184642), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[node name="CameraPlayer" type="CharacterBody3D" node_paths=PackedStringArray("Hud", "PlayerUi", "Camera") groups=["player"]]
+[node name="CameraPlayer" type="CharacterBody3D" node_paths=PackedStringArray("Hud", "PlayerUi", "SettingsSaveDialog", "SettingsLoadDialog", "Camera") groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_5wmd6")
 Hud = NodePath("HUD")
 PlayerUi = NodePath("PlayerUI")
+SettingsSaveDialog = NodePath("SettingsSaveDialog")
+SettingsLoadDialog = NodePath("SettingsLoadDialog")
 SprintMultiplier = 5.0
 MouseAccelerationEnabled = false
 Camera = NodePath("Camera3D")
@@ -75,3 +77,25 @@ default_color = Color(1, 0, 0, 1)
 
 [node name="PlayerUI" parent="." instance=ExtResource("2_5wmd6")]
 visible = false
+
+[node name="SettingsSaveDialog" type="FileDialog" parent="."]
+title = "Save World Generation Settings"
+initial_position = 2
+transient = false
+exclusive = false
+access = 1
+root_subfolder = "WorldGenerationBundles"
+filters = PackedStringArray("*.tres")
+
+[node name="SettingsLoadDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Load World Generation Settings"
+initial_position = 2
+transient = false
+exclusive = false
+popup_window = true
+ok_button_text = "Open"
+file_mode = 0
+access = 1
+root_subfolder = "WorldGenerationBundles"
+filters = PackedStringArray("*.tres")

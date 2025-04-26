@@ -102,7 +102,7 @@ public partial class CameraMovement : CharacterBody3D
 	
 	private Double PlayerRotationTarget { get; set; }
 	private Double HeadRotationTarget { get; set; }
-	private Boolean MouseCaptured { get; set; } = true;
+	protected Boolean MouseCaptured { get; set; } = true;
 
 	public override void _Ready()
 	{
@@ -151,13 +151,19 @@ public partial class CameraMovement : CharacterBody3D
 		}
 	}
 
+	protected void SwitchMouseCaptured(Boolean mouseCaptured)
+	{
+		MouseCaptured = mouseCaptured;
+		Input.SetMouseMode(MouseCaptured ? Input.MouseModeEnum.Captured : Input.MouseModeEnum.Visible);
+	}
+
 	private void HandleInput(Double deltaTime)
 	{
 		Vector3 movementDirection = Vector3.Zero;
 		if (Input.IsActionJustPressed(KeyEscape))
 		{
 			MouseCaptured = !MouseCaptured;
-			Input.SetMouseMode(MouseCaptured ? Input.MouseModeEnum.Captured : Input.MouseModeEnum.Visible);
+			SwitchMouseCaptured(MouseCaptured);
 		}
 
 		if (MouseCaptured)

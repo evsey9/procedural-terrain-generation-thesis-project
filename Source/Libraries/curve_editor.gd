@@ -55,11 +55,11 @@ func _ready() -> void:
 
 func _on_core_curve_changed() -> void:
 	curve_changed.emit(_curve)
-	print("ch")
+	#print("ch")
 
 func _on_curve_changed() -> void:
 	queue_redraw()
-	print("ch2")
+	#print("ch2")
 	if selected_index >= _curve.point_count:
 		set_selected_index(-1)
 		

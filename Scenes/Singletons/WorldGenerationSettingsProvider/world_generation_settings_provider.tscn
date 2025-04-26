@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4bh8ga0ilwjj"]
+
+[ext_resource type="Script" uid="uid://8enotny60afm" path="res://Scenes/Singletons/WorldGenerationSettingsProvider/WorldGenerationSettingsProvider.cs" id="1_8kia6"]
+[ext_resource type="Resource" uid="uid://c2dw6gify532i" path="res://Assets/SaveDatas/DefaultWorldGenerationBundle.tres" id="2_077ht"]
+
+[node name="WorldGenerationSettingsProvider" type="Node"]
+script = ExtResource("1_8kia6")
+SaveData = ExtResource("2_077ht")
+metadata/_custom_type_script = "uid://8enotny60afm"

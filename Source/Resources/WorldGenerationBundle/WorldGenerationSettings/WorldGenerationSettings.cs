@@ -1,11 +1,10 @@
 using System;
 using Godot;
 
-namespace ProceduralTerrainGenerationThesisProject.Singletons;
+namespace ProceduralTerrainGenerationThesisProject.Resources;
 
-public partial class WorldGenerationSettings : Node
+public partial class WorldGenerationSettings : Resource
 {
-	
 	#region Defaults
 	
 	public Int32 DefaultSeaLevelY { get; set; } = 64;
@@ -38,39 +37,44 @@ public partial class WorldGenerationSettings : Node
 	#region Signals
 	
 	[Signal]
-	public delegate void ChangedEventHandler();
+	public delegate void ReloadedEventHandler();
 	
 	#endregion
-
-	public static WorldGenerationSettings? Singleton { get; private set; }
 	
 	public WorldGenerationSettings() : base()
 	{
-		Singleton = this;
 		Reset();
 	}
-
+	
 	public void Reset(Boolean sendSignal = true)
 	{
-		if (sendSignal)
-		{
-			EmitSignal(SignalName.Changed);
-		}
 		SeaLevelY = DefaultSeaLevelY;
 		HeightmapMinY = DefaultHeightmapMinY;
 		HeightmapMaxY = DefaultHeightmapMaxY;
 		HorizontalScale = DefaultHorizontalScale;
 		TreesMinY = DefaultTreesMinY;
 		TreesMaxY = DefaultTreesMaxY;
+		if (sendSignal)
+		{
+			EmitSignal(Resource.SignalName.Changed);
+			EmitSignal(SignalName.Reloaded);
+		}
 	}
 
 	public void ChangeSettings()
 	{
-		EmitSignal(SignalName.Changed);
+		EmitSignal(Resource.SignalName.Changed);
 	}
-
-	public static WorldGenerationSettings GetSingleton(Node sceneNode)
+	
+	public void LoadFromSaveData(SaveData.WorldGenerationSettings saveData)
 	{
-		return sceneNode.GetNode<WorldGenerationSettings>("/root/WorldGenerationSettings");
+		DefaultSeaLevelY = saveData.DefaultSeaLevelY;
+		DefaultHeightmapMinY = saveData.DefaultHeightmapMinY;
+		DefaultHeightmapMaxY = saveData.DefaultHeightmapMaxY;
+		DefaultHorizontalScale = saveData.DefaultHorizontalScale;
+		DefaultTreesMinY = saveData.DefaultTreesMinY;
+		DefaultTreesMaxY = saveData.DefaultTreesMaxY;
+		Reset(true);
+		EmitSignal(SignalName.Reloaded);
 	}
 }

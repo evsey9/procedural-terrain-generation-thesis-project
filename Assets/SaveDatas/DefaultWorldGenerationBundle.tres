@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="WorldGenerationBundle" load_steps=14 format=3 uid="uid://c2dw6gify532i"]
+
+[ext_resource type="Script" uid="uid://bse0hoj65rjq8" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessHeightmapSettings/ContinentalnessHeightmapSettings.cs" id="1_6os5m"]
+[ext_resource type="Curve" uid="uid://c8kpw0rv0bhn1" path="res://Source/HeightmapProviders/ContinentalnessHeightmapProvider/continentalness_contribution_curve_basic.tres" id="1_i4wph"]
+[ext_resource type="Curve" uid="uid://b1onm3h4fofg2" path="res://Source/HeightmapProviders/ContinentalnessHeightmapProvider/continentalness_curve.tres" id="2_15gwo"]
+[ext_resource type="Script" uid="uid://dakfaf2cqhwcm" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationHeightmapSettings/WorldGenerationHeightmapSettings.cs" id="2_hm7l1"]
+[ext_resource type="FastNoiseLite" uid="uid://c5d2qmo23f8ev" path="res://Source/HeightmapProviders/ContinentalnessHeightmapProvider/continentalness_noise.tres" id="3_15gwo"]
+[ext_resource type="Script" uid="uid://bid68lg0hpiq4" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationSettings/WorldGenerationSettings.cs" id="3_i4wph"]
+[ext_resource type="Script" uid="uid://ceb5ql3y2mwan" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationBundle.cs" id="4_15gwo"]
+
+[sub_resource type="Resource" id="Resource_c5vli"]
+script = ExtResource("1_6os5m")
+DefaultNoise = ExtResource("3_15gwo")
+DefaultCurve = ExtResource("2_15gwo")
+DefaultContributionCurve = ExtResource("1_i4wph")
+DefaultScale = 1.0
+DefaultPower = 1.5
+
+[sub_resource type="Curve" id="Curve_wghp6"]
+
+[sub_resource type="Curve" id="Curve_ufy7r"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r481m"]
+
+[sub_resource type="Resource" id="Resource_kxnio"]
+script = ExtResource("2_hm7l1")
+DefaultNoise = SubResource("FastNoiseLite_r481m")
+DefaultCurve = SubResource("Curve_ufy7r")
+DefaultContributionCurve = SubResource("Curve_wghp6")
+DefaultScale = 1.0
+DefaultPower = 1.0
+
+[sub_resource type="Resource" id="Resource_v4rtl"]
+script = ExtResource("3_i4wph")
+DefaultSeaLevelY = 64
+DefaultHeightmapMinY = 0
+DefaultHeightmapMaxY = 128
+DefaultHorizontalScale = 1.0
+DefaultTreesMinY = 0
+DefaultTreesMaxY = 0
+
+[resource]
+script = ExtResource("4_15gwo")
+WorldGenerationSettings = SubResource("Resource_v4rtl")
+ContinentalnessHeightmapSettings = SubResource("Resource_c5vli")
+WorldGenerationHeightmapSettings = SubResource("Resource_kxnio")
+metadata/_custom_type_script = "uid://ceb5ql3y2mwan"
