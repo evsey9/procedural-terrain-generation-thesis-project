@@ -9,6 +9,8 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 {
 	private WorldGenerationSettingsProvider? worldGenerationSettingsProvider;
 	private WorldHeightmapProvider? worldHeightmapProvider;
+	public Boolean WorldGenerationEnabled { get; set; } = true;
+
 	private enum Blocks
 	{
 		Air = 0,
@@ -33,8 +35,15 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 
 		worldGenerationSettingsProvider ??= WorldGenerationSettingsProvider.Singleton;
 		worldHeightmapProvider ??= WorldHeightmapProvider.Singleton;
-		
+
+		if (!WorldGenerationEnabled)
+		{
+			return;
+		}
 		//base._GenerateBlock(outBuffer, originInVoxels, lod);
+		
+		//worldGenerationSettingsProvider.UpdateWorldGenerationInProgress();
+		
 		Int32 blockSize = outBuffer.GetSize().X;
 
 		Int32 originY = originInVoxels.Y;

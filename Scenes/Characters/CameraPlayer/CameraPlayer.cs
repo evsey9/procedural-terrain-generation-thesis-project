@@ -81,7 +81,7 @@ public partial class CameraPlayer : CameraMovement
 	private void SettingsLoadDialogFileSelectedEventHandler(String filePath)
 	{
 		GD.Print($"loading at path {filePath}");
-		WorldGenerationSettingsProvider.GetSingleton(this).Resource.LoadFromSaveData(GD.Load<Resources.SaveData.WorldGenerationBundle>(filePath));
+		WorldGenerationSettingsProvider.GetSingleton(this).LoadFromSaveData(GD.Load<Resources.SaveData.WorldGenerationBundle>(filePath));
 		SwitchMouseCaptured(true);
 	}
 }

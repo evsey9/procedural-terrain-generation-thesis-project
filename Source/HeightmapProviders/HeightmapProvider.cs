@@ -2,6 +2,7 @@ using System;
 using Godot;
 using ProceduralTerrainGenerationThesisProject.Resources;
 using ProceduralTerrainGenerationThesisProject.Singletons;
+using ProceduralTerrainGenerationThesisProject.VoxelGeneratorScripts;
 
 namespace ProceduralTerrainGenerationThesisProject.HeightmapProviders;
 
@@ -40,5 +41,13 @@ public partial class HeightmapProvider : Node
 				                                        new Vector3(HeightmapSettings.NoiseTextureWidth / 2f, HeightmapSettings.NoiseTextureHeight / 2f, 0);
 			}
 		}
+	}
+
+	public void Reset()
+	{
+		VoxelTerrain voxelTerrain = (VoxelTerrain)GetTree().GetFirstNodeInGroup("voxel_terrain");
+		((WorldVoxelGenerator)voxelTerrain.Generator).WorldGenerationEnabled = false;
+		WorldGenerationSettingsProvider.GetSingleton(this).SetInstantReset();
+		HeightmapSettings.Reset();
 	}
 }

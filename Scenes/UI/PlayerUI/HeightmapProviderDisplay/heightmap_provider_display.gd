@@ -105,7 +105,7 @@ func _on_reset_button_pressed() -> void:
 	#print()
 
 func reset():
-	heightmap_provider.HeightmapSettings.Reset()
+	heightmap_provider.Reset()
 	#update_all_info()
 
 func update_all_info():
@@ -116,21 +116,28 @@ func update_all_info():
 
 func _on_curve_editor_curve_changed(curve: Curve) -> void:
 	properties_changed()
-	$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.show()
+	#$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.show()
 
 
 func _on_contribution_curve_editor_curve_changed(curve: Curve) -> void:
 	properties_changed()
-	$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.show()
+	#$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.show()
 
 
 func _on_bake_button_pressed() -> void:
 	heightmap_provider.HeightmapSettings.BakeCurves()
-	$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.hide()
+	#$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.hide()
 
 func properties_changed() -> void:
-	update_shader()
+	#update_shader()
+	heightmap_provider.HeightmapSettings.ChangeSettings()
 	#get_tree().get_first_node_in_group("world_generation_settings_display").children_heightmap_properties_changed()
 
 func world_generation_settings_changed():
 	update_shader()
+
+func disable_reset_button() -> void:
+	$ScaleSliderControl/VBoxContainer/HBoxContainer/ResetButton.enabled = false
+
+func enable_reset_button() -> void:
+	$ScaleSliderControl/VBoxContainer/HBoxContainer/ResetButton.enabled = true

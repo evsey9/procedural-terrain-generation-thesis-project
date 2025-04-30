@@ -53,6 +53,12 @@ public partial class WorldGenerationBundle : Resource
 			EmitSignal(Resource.SignalName.Changed);
 		}
 	}
+	
+	public virtual void BakeCurves()
+	{
+		ContinentalnessHeightmapSettings.BakeCurves();
+		//WorldGenerationHeightmapSettings.BakeCurves();
+	}
 
 	public void LoadFromSaveData(SaveData.WorldGenerationBundle saveData)
 	{

@@ -3,7 +3,23 @@
 [ext_resource type="Script" uid="uid://8enotny60afm" path="res://Scenes/Singletons/WorldGenerationSettingsProvider/WorldGenerationSettingsProvider.cs" id="1_8kia6"]
 [ext_resource type="Resource" uid="uid://c2dw6gify532i" path="res://Assets/SaveDatas/DefaultWorldGenerationBundle.tres" id="2_077ht"]
 
-[node name="WorldGenerationSettingsProvider" type="Node"]
+[node name="WorldGenerationSettingsProvider" type="Node" node_paths=PackedStringArray("WorldResetTimer", "WorldGenerationInProgressTimer", "InstantResetTimer")]
 script = ExtResource("1_8kia6")
 SaveData = ExtResource("2_077ht")
+WorldResetTimer = NodePath("WorldResetTimer")
+WorldGenerationInProgressTimer = NodePath("WorldGenerationInProgressTimer")
+InstantResetTimer = NodePath("InstantResetTimer")
 metadata/_custom_type_script = "uid://8enotny60afm"
+
+[node name="WorldResetTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="WorldGenerationInProgressTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="InstantResetTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+autostart = true

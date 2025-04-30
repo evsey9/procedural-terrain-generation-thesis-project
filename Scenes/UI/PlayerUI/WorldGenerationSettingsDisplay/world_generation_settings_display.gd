@@ -94,3 +94,9 @@ func properties_changed() -> void:
 
 func children_heightmap_properties_changed() -> void:
 	get_new_noise_texture()
+
+func disable_reset_button() -> void:
+	$ScaleSliderControl/VBoxContainer/HBoxContainer/ResetButton.enabled = false
+	
+func enable_reset_button() -> void:
+	$ScaleSliderControl/VBoxContainer/HBoxContainer/ResetButton.enabled = true
