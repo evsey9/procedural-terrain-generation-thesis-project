@@ -90,7 +90,10 @@ func _on_properties_box_number_changed(key: StringName, new_value: float) -> voi
 			heightmap_provider.HeightmapSettings.DisplayNoiseScale = new_value
 		_:
 			pass
-	properties_changed()
+	if key != "Preview Zoom":
+		properties_changed()
+	else:
+		update_shader()
 
 
 func update_shader():
