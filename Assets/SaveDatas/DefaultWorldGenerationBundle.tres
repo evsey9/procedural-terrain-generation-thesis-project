@@ -1,32 +1,71 @@
-[gd_resource type="Resource" script_class="WorldGenerationBundle" load_steps=14 format=3 uid="uid://c2dw6gify532i"]
+[gd_resource type="Resource" script_class="WorldGenerationBundle" load_steps=29 format=3 uid="uid://c2dw6gify532i"]
 
 [ext_resource type="Script" uid="uid://bse0hoj65rjq8" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessHeightmapSettings/ContinentalnessHeightmapSettings.cs" id="1_6os5m"]
-[ext_resource type="Curve" uid="uid://c8kpw0rv0bhn1" path="res://Source/HeightmapProviders/ContinentalnessHeightmapProvider/continentalness_contribution_curve_basic.tres" id="1_i4wph"]
-[ext_resource type="Curve" uid="uid://b1onm3h4fofg2" path="res://Source/HeightmapProviders/ContinentalnessHeightmapProvider/continentalness_curve.tres" id="2_15gwo"]
+[ext_resource type="Curve" uid="uid://dulah278hfhpu" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessHeightmapSettings/continentalness_contribution_curve_basic.tres" id="1_15gwo"]
+[ext_resource type="Script" uid="uid://chceoddxa5od4" path="res://Source/Resources/SaveData/WorldGenerationBundle/Continentalness2HeightmapSettings/Continentalness2HeightmapSettings.cs" id="1_gi7pi"]
+[ext_resource type="Curve" uid="uid://cbrb68ahaypx8" path="res://Source/Resources/WorldGenerationBundle/Continentalness2HeightmapSettings/continentalness2_contribution_curve_basic.tres" id="1_xqwj6"]
+[ext_resource type="Script" uid="uid://c7rcsepu0k4p8" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessFinalHeightmapSettings/ContinentalnessFinalHeightmapSettings.cs" id="2_c5vli"]
 [ext_resource type="Script" uid="uid://dakfaf2cqhwcm" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationHeightmapSettings/WorldGenerationHeightmapSettings.cs" id="2_hm7l1"]
-[ext_resource type="FastNoiseLite" uid="uid://c5d2qmo23f8ev" path="res://Source/HeightmapProviders/ContinentalnessHeightmapProvider/continentalness_noise.tres" id="3_15gwo"]
+[ext_resource type="Curve" uid="uid://dhlaw6f1lcyyr" path="res://Source/Resources/WorldGenerationBundle/Continentalness2HeightmapSettings/continentalness2_curve.tres" id="2_kxnio"]
+[ext_resource type="Curve" uid="uid://brg81p5ahgl3n" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessHeightmapSettings/continentalness_curve.tres" id="2_te25q"]
+[ext_resource type="FastNoiseLite" uid="uid://d2wl85bydjps4" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessHeightmapSettings/continentalness_noise.tres" id="3_airp2"]
 [ext_resource type="Script" uid="uid://bid68lg0hpiq4" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationSettings/WorldGenerationSettings.cs" id="3_i4wph"]
 [ext_resource type="Script" uid="uid://ceb5ql3y2mwan" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationBundle.cs" id="4_15gwo"]
+[ext_resource type="Script" uid="uid://m6ytvkk2ngls" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/ContinentalnessPickerHeightmapSettings.cs" id="7_4vgnk"]
+[ext_resource type="Curve" uid="uid://cygxfedx7usfq" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/continentalness_picker_contribution_curve_basic.tres" id="9_v4rtl"]
+[ext_resource type="Curve" uid="uid://diahr2mv55hcd" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/continentalness_picker_curve.tres" id="10_n1oc6"]
+[ext_resource type="Curve" uid="uid://cc1tdeofriux3" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessFinalHeightmapSettings/continentalness_final_contribution_curve_basic.tres" id="12_v4rtl"]
+[ext_resource type="Curve" uid="uid://dmqim4r881c5y" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessFinalHeightmapSettings/continentalness_final_curve.tres" id="13_n1oc6"]
 
-[sub_resource type="Resource" id="Resource_c5vli"]
-script = ExtResource("1_6os5m")
-DefaultNoise = ExtResource("3_15gwo")
-DefaultCurve = ExtResource("2_15gwo")
-DefaultContributionCurve = ExtResource("1_i4wph")
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kxnio"]
+
+[sub_resource type="Resource" id="Resource_n1oc6"]
+script = ExtResource("1_gi7pi")
+DefaultNoise = SubResource("FastNoiseLite_kxnio")
+DefaultCurve = ExtResource("2_kxnio")
+DefaultContributionCurve = ExtResource("1_xqwj6")
 DefaultScale = 1.0
 DefaultPower = 1.5
 
-[sub_resource type="Curve" id="Curve_wghp6"]
+[sub_resource type="Curve" id="Curve_jr1my"]
 
-[sub_resource type="Curve" id="Curve_ufy7r"]
+[sub_resource type="Curve" id="Curve_hu21x"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jwu63"]
+
+[sub_resource type="Resource" id="Resource_kolwr"]
+script = ExtResource("2_c5vli")
+DefaultNoise = SubResource("FastNoiseLite_jwu63")
+DefaultCurve = SubResource("Curve_hu21x")
+DefaultContributionCurve = SubResource("Curve_jr1my")
+DefaultScale = 1.0
+DefaultPower = 1.0
+
+[sub_resource type="Resource" id="Resource_c5vli"]
+script = ExtResource("1_6os5m")
+DefaultNoise = ExtResource("3_airp2")
+DefaultCurve = ExtResource("2_te25q")
+DefaultContributionCurve = ExtResource("1_15gwo")
+DefaultScale = 1.0
+DefaultPower = 1.5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y42vc"]
+
+[sub_resource type="Resource" id="Resource_xofi4"]
+script = ExtResource("7_4vgnk")
+DefaultNoise = SubResource("FastNoiseLite_y42vc")
+DefaultCurve = ExtResource("10_n1oc6")
+DefaultContributionCurve = ExtResource("9_v4rtl")
+DefaultScale = 1.0
+DefaultPower = 1.5
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_r481m"]
 
 [sub_resource type="Resource" id="Resource_kxnio"]
 script = ExtResource("2_hm7l1")
 DefaultNoise = SubResource("FastNoiseLite_r481m")
-DefaultCurve = SubResource("Curve_ufy7r")
-DefaultContributionCurve = SubResource("Curve_wghp6")
+DefaultCurve = ExtResource("13_n1oc6")
+DefaultContributionCurve = ExtResource("12_v4rtl")
 DefaultScale = 1.0
 DefaultPower = 1.0
 
@@ -43,5 +82,8 @@ DefaultTreesMaxY = 0
 script = ExtResource("4_15gwo")
 WorldGenerationSettings = SubResource("Resource_v4rtl")
 ContinentalnessHeightmapSettings = SubResource("Resource_c5vli")
+Continentalness2HeightmapSettings = SubResource("Resource_n1oc6")
+ContinentalnessPickerHeightmapSettings = SubResource("Resource_xofi4")
+ContinentalnessFinalHeightmapSettings = SubResource("Resource_kolwr")
 WorldGenerationHeightmapSettings = SubResource("Resource_kxnio")
 metadata/_custom_type_script = "uid://ceb5ql3y2mwan"

@@ -18,6 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 ContinentalnessHeightmapProvider="*res://Source/HeightmapProviders/ContinentalnessHeightmapProvider/ContinentalnessHeightmapProvider.cs"
+Continentalness2HeightmapProvider="*res://Source/HeightmapProviders/Continentalness2HeightmapProvider/Continentalness2HeightmapProvider.cs"
+ContinentalnessPickerHeightmapProvider="*res://Source/HeightmapProviders/ContinentalnessPickerHeightmapProvider/ContinentalnessPickerHeightmapProvider.cs"
+ContinentalnessFinalHeightmapProvider="*res://Source/HeightmapProviders/ContinentalnessFinalHeightmapProvider/ContinentalnessFinalHeightmapProvider.cs"
 WorldHeightmapProvider="*res://Source/HeightmapProviders/WorldHeightmapProvider/WorldHeightmapProvider.cs"
 WorldGenerationSettingsProvider="*res://Scenes/Singletons/WorldGenerationSettingsProvider/world_generation_settings_provider.tscn"
 

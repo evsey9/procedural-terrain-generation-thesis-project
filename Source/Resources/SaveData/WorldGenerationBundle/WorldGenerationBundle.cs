@@ -13,6 +13,15 @@ public partial class WorldGenerationBundle : Resource
 	public ContinentalnessHeightmapSettings ContinentalnessHeightmapSettings { get; set; } = new ContinentalnessHeightmapSettings();
 	
 	[Export]
+	public Continentalness2HeightmapSettings Continentalness2HeightmapSettings { get; set; } = new Continentalness2HeightmapSettings();
+	
+	[Export]
+	public ContinentalnessPickerHeightmapSettings ContinentalnessPickerHeightmapSettings { get; set; } = new ContinentalnessPickerHeightmapSettings();
+	
+	[Export]
+	public ContinentalnessFinalHeightmapSettings ContinentalnessFinalHeightmapSettings { get; set; } = new ContinentalnessFinalHeightmapSettings();
+	
+	[Export]
 	public WorldGenerationHeightmapSettings WorldGenerationHeightmapSettings { get; set; } = new WorldGenerationHeightmapSettings();
 
 	public WorldGenerationBundle()
@@ -24,6 +33,9 @@ public partial class WorldGenerationBundle : Resource
 	{
 		WorldGenerationSettings = new WorldGenerationSettings(bundle.WorldGenerationSettings);
 		ContinentalnessHeightmapSettings = new ContinentalnessHeightmapSettings(bundle.ContinentalnessHeightmapSettings);
+		Continentalness2HeightmapSettings = new Continentalness2HeightmapSettings(bundle.Continentalness2HeightmapSettings);
+		ContinentalnessPickerHeightmapSettings = new ContinentalnessPickerHeightmapSettings(bundle.ContinentalnessPickerHeightmapSettings);
+		ContinentalnessFinalHeightmapSettings = new ContinentalnessFinalHeightmapSettings(bundle.ContinentalnessFinalHeightmapSettings);
 		WorldGenerationHeightmapSettings = new WorldGenerationHeightmapSettings(bundle.WorldGenerationHeightmapSettings);
 	}
 }

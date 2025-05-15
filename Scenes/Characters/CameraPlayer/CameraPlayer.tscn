@@ -89,7 +89,7 @@ filters = PackedStringArray("*.tres")
 
 [node name="SettingsLoadDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1
-title = "Load World Generation Settings"
+title = "Open a File"
 initial_position = 2
 transient = false
 exclusive = false
