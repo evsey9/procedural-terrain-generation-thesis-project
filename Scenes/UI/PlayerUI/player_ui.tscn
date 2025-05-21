@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://yr4uj7vt86sl"]
+[gd_scene load_steps=7 format=3 uid="uid://yr4uj7vt86sl"]
 
 [ext_resource type="Script" uid="uid://degcg7hdtobhk" path="res://Scenes/UI/PlayerUI/PlayerUi.cs" id="1_ii7ti"]
 [ext_resource type="PackedScene" uid="uid://dey7vu57iaonp" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/Continentalness/continentalness_heightmap_provider_display.tscn" id="2_3y35k"]
 [ext_resource type="PackedScene" uid="uid://b8gj0brr3ncb3" path="res://Scenes/UI/PlayerUI/WorldGenerationSettingsDisplay/world_generation_settings_display.tscn" id="2_ii7ti"]
+[ext_resource type="PackedScene" uid="uid://b2agcirr16pah" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/ContinentalnessFinal/continentalness_final_heightmap_provider_display.tscn" id="3_skrvk"]
+[ext_resource type="PackedScene" uid="uid://b843f14d03c8r" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/Continentalness2/continentalness2_heightmap_provider_display.tscn" id="5_netf4"]
+[ext_resource type="PackedScene" uid="uid://kvr8n2o4svv7" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/ContinentalnessPicker/continentalness_picker_heightmap_provider_display.tscn" id="6_wuqjx"]
 
 [node name="PlayerUI" type="Control"]
 layout_mode = 3
@@ -47,6 +50,18 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 1
 
+[node name="ContinentalnessFinalHeightmapProviderDisplay" parent="Control/Panel/ScrollContainer/VBoxContainer" groups=["heightmap_provider_displays"] instance=ExtResource("3_skrvk")]
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="ContinentalnessPickerHeightmapProviderDisplay" parent="Control/Panel/ScrollContainer/VBoxContainer" groups=["heightmap_provider_displays"] instance=ExtResource("6_wuqjx")]
+layout_mode = 2
+size_flags_horizontal = 1
+
 [node name="ContinentalnessHeightmapProviderDisplay" parent="Control/Panel/ScrollContainer/VBoxContainer" groups=["heightmap_provider_displays"] instance=ExtResource("2_3y35k")]
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="Continentalness2HeightmapProviderDisplay" parent="Control/Panel/ScrollContainer/VBoxContainer" groups=["heightmap_provider_displays"] instance=ExtResource("5_netf4")]
 layout_mode = 2
 size_flags_horizontal = 1

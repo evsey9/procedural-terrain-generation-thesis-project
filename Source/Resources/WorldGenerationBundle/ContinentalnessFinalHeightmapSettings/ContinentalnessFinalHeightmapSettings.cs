@@ -23,10 +23,23 @@ public partial class ContinentalnessFinalHeightmapSettings : HeightmapSettings
 	{
 	}
 	
+	public override Double GetValueAt(Double x, Double z)
+	{
+		if (Curve is not null && ContributionCurve is not null)
+		{
+			Double continentalnessValue = WorldGenerationBundle.ContinentalnessHeightmapSettings.GetValueAt(x, z);
+			Double continentalness2Value = WorldGenerationBundle.Continentalness2HeightmapSettings.GetValueAt(x, z);
+			Double continentalnessPickerValue = WorldGenerationBundle.ContinentalnessPickerHeightmapSettings.GetValueAt(x, z);
+			Double value = Double.Lerp(continentalnessValue, continentalness2Value, continentalnessPickerValue);
+			return Curve.SampleBaked((Single)Math.Pow(value, Power)) * ContributionCurve.SampleBaked((Single)value);
+		}
+		return 0;
+	}
+	
 	public override Int32 GetHeightAt(Double x, Double z)
 	{
-		return 0;
-		//return (Int32)(WorldGenerationBundle.ContinentalnessHeightmapSettings.GetValueAt(x, z) * WorldGenerationBundle.WorldGenerationSettings.HeightmapRange) + WorldGenerationBundle.WorldGenerationSettings.HeightmapMinY;
+		Double value = GetValueAt(x, z);
+		return (Int32)(value * WorldGenerationBundle.WorldGenerationSettings.HeightmapRange) + WorldGenerationBundle.WorldGenerationSettings.HeightmapMinY;
 	}
 	
 	public void LoadFromSaveData(SaveData.ContinentalnessFinalHeightmapSettings saveData)

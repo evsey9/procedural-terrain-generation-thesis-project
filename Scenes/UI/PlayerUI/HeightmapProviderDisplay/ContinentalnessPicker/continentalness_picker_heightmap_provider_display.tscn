@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://kvr8n2o4svv7"]
+
+[ext_resource type="PackedScene" uid="uid://djbiiqiwrejpa" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/heightmap_provider_display.tscn" id="1_in77e"]
+[ext_resource type="Script" uid="uid://yw2b5knhpe5f" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/ContinentalnessPicker/continentalness_picker_heightmap_provider_display.gd" id="2_cnb5q"]
+[ext_resource type="Shader" uid="uid://dy0wqs5wyx1qp" path="res://Source/Shaders/continentalness_picker_heightmap_display.gdshader" id="3_0go3v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_udh2s"]
+shader = ExtResource("3_0go3v")
+shader_parameter/scale = 0.0
+shader_parameter/power = 0.0
+shader_parameter/sea_level_value = 0.5
+shader_parameter/rotation = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_cnb5q"]
+resource_local_to_scene = true
+
+[node name="ContinentalnessPickerHeightmapProviderDisplay" instance=ExtResource("1_in77e")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1182.0
+offset_bottom = 840.0
+grow_horizontal = 1
+grow_vertical = 1
+script = ExtResource("2_cnb5q")
+
+[node name="NoiseTextureRect" parent="NoiseTextureControl" index="0"]
+material = SubResource("ShaderMaterial_udh2s")
+texture = SubResource("CanvasTexture_cnb5q")
+
+[node name="Label" parent="." index="1"]
+text = "Continentalness Picker"
+
+[node name="ScaleSliderControl" parent="." index="2"]
+anchor_left = 0.313239
+anchor_right = 0.609024

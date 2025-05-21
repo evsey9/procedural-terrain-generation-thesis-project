@@ -1,0 +1,47 @@
+extends HeightmapProviderDisplay
+
+func _init() -> void:
+	heightmap_provider = ContinentalnessFinalHeightmapProvider
+	super()
+
+func _ready() -> void:
+	super()
+
+func update_shader():
+	#super()
+	ContinentalnessHeightmapProvider.HeightmapSettings.UpdateNoiseTexture()
+	Continentalness2HeightmapProvider.HeightmapSettings.UpdateNoiseTexture()
+	ContinentalnessPickerHeightmapProvider.HeightmapSettings.UpdateNoiseTexture()
+	heightmap_provider.HeightmapSettings.UpdateNoiseTexture()
+	noise_texture_rect.material.set_shader_parameter("continentalness_scale", ContinentalnessHeightmapProvider.HeightmapSettings.Scale)
+	noise_texture_rect.material.set_shader_parameter("continentalness_power", ContinentalnessHeightmapProvider.HeightmapSettings.Power)
+
+	noise_texture_rect.material.set_shader_parameter("continentalness2_scale", Continentalness2HeightmapProvider.HeightmapSettings.Scale)
+	noise_texture_rect.material.set_shader_parameter("continentalness2_power", Continentalness2HeightmapProvider.HeightmapSettings.Power)
+
+	noise_texture_rect.material.set_shader_parameter("continentalness_picker_scale", ContinentalnessPickerHeightmapProvider.HeightmapSettings.Scale)
+	noise_texture_rect.material.set_shader_parameter("continentalness_picker_power", ContinentalnessPickerHeightmapProvider.HeightmapSettings.Power)
+	
+	noise_texture_rect.material.set_shader_parameter("continentalness_final_scale", heightmap_provider.HeightmapSettings.Scale)
+	noise_texture_rect.material.set_shader_parameter("continentalness_final_power", heightmap_provider.HeightmapSettings.Power)
+	
+	noise_texture_rect.material.set_shader_parameter("continentalness_final_sea_level_value", WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.SeaLevelRatio)
+	
+
+func setup_noise_texture():
+	#super()
+	noise_texture_rect.material.set_shader_parameter("continentalness_noise_texture", ContinentalnessHeightmapProvider.HeightmapSettings.NoiseTexture)
+	noise_texture_rect.material.set_shader_parameter("continentalness_noise_curve_texture", ContinentalnessHeightmapProvider.HeightmapSettings.CurveTexture)
+	noise_texture_rect.material.set_shader_parameter("continentalness_contribution_curve_texture", ContinentalnessHeightmapProvider.HeightmapSettings.ContributionCurveTexture)
+	
+	noise_texture_rect.material.set_shader_parameter("continentalness2_noise_texture", Continentalness2HeightmapProvider.HeightmapSettings.NoiseTexture)
+	noise_texture_rect.material.set_shader_parameter("continentalness2_noise_curve_texture", Continentalness2HeightmapProvider.HeightmapSettings.CurveTexture)
+	noise_texture_rect.material.set_shader_parameter("continentalness2_contribution_curve_texture", Continentalness2HeightmapProvider.HeightmapSettings.ContributionCurveTexture)
+	
+	noise_texture_rect.material.set_shader_parameter("continentalness_picker_noise_texture", ContinentalnessPickerHeightmapProvider.HeightmapSettings.NoiseTexture)
+	noise_texture_rect.material.set_shader_parameter("continentalness_picker_noise_curve_texture", ContinentalnessPickerHeightmapProvider.HeightmapSettings.CurveTexture)
+	noise_texture_rect.material.set_shader_parameter("continentalness_picker_contribution_curve_texture", ContinentalnessPickerHeightmapProvider.HeightmapSettings.ContributionCurveTexture)
+	
+	noise_texture_rect.material.set_shader_parameter("continentalness_final_noise_curve_texture", heightmap_provider.HeightmapSettings.CurveTexture)
+	noise_texture_rect.material.set_shader_parameter("continentalness_final_contribution_curve_texture", heightmap_provider.HeightmapSettings.ContributionCurveTexture)
+	update_shader()

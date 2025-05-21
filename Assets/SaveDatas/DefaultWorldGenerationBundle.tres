@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldGenerationBundle" load_steps=29 format=3 uid="uid://c2dw6gify532i"]
+[gd_resource type="Resource" script_class="WorldGenerationBundle" load_steps=27 format=3 uid="uid://c2dw6gify532i"]
 
 [ext_resource type="Script" uid="uid://bse0hoj65rjq8" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessHeightmapSettings/ContinentalnessHeightmapSettings.cs" id="1_6os5m"]
 [ext_resource type="Curve" uid="uid://dulah278hfhpu" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessHeightmapSettings/continentalness_contribution_curve_basic.tres" id="1_15gwo"]
@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://ceb5ql3y2mwan" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationBundle.cs" id="4_15gwo"]
 [ext_resource type="Script" uid="uid://m6ytvkk2ngls" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/ContinentalnessPickerHeightmapSettings.cs" id="7_4vgnk"]
 [ext_resource type="Curve" uid="uid://cygxfedx7usfq" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/continentalness_picker_contribution_curve_basic.tres" id="9_v4rtl"]
-[ext_resource type="Curve" uid="uid://diahr2mv55hcd" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/continentalness_picker_curve.tres" id="10_n1oc6"]
+[ext_resource type="Curve" uid="uid://dhpdu1n04f7pc" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/continentalness_picker_curve_linear.tres" id="12_n1oc6"]
 [ext_resource type="Curve" uid="uid://cc1tdeofriux3" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessFinalHeightmapSettings/continentalness_final_contribution_curve_basic.tres" id="12_v4rtl"]
 [ext_resource type="Curve" uid="uid://dmqim4r881c5y" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessFinalHeightmapSettings/continentalness_final_curve.tres" id="13_n1oc6"]
 
@@ -27,17 +27,13 @@ DefaultContributionCurve = ExtResource("1_xqwj6")
 DefaultScale = 1.0
 DefaultPower = 1.5
 
-[sub_resource type="Curve" id="Curve_jr1my"]
-
-[sub_resource type="Curve" id="Curve_hu21x"]
-
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jwu63"]
 
 [sub_resource type="Resource" id="Resource_kolwr"]
 script = ExtResource("2_c5vli")
 DefaultNoise = SubResource("FastNoiseLite_jwu63")
-DefaultCurve = SubResource("Curve_hu21x")
-DefaultContributionCurve = SubResource("Curve_jr1my")
+DefaultCurve = ExtResource("13_n1oc6")
+DefaultContributionCurve = ExtResource("12_v4rtl")
 DefaultScale = 1.0
 DefaultPower = 1.0
 
@@ -54,10 +50,10 @@ DefaultPower = 1.5
 [sub_resource type="Resource" id="Resource_xofi4"]
 script = ExtResource("7_4vgnk")
 DefaultNoise = SubResource("FastNoiseLite_y42vc")
-DefaultCurve = ExtResource("10_n1oc6")
+DefaultCurve = ExtResource("12_n1oc6")
 DefaultContributionCurve = ExtResource("9_v4rtl")
 DefaultScale = 1.0
-DefaultPower = 1.5
+DefaultPower = 1.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_r481m"]
 

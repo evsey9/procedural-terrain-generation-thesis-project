@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2agcirr16pah"]
+
+[ext_resource type="PackedScene" uid="uid://djbiiqiwrejpa" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/heightmap_provider_display.tscn" id="1_e2iam"]
+[ext_resource type="Script" uid="uid://dp0nheuco3hg8" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/ContinentalnessFinal/continentalness_final_heightmap_provider_display.gd" id="2_exxxe"]
+[ext_resource type="Shader" uid="uid://uu7i3dlqwi57" path="res://Source/Shaders/continentalness_final_heightmap_display.gdshader" id="3_advmd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kbaeq"]
+shader = ExtResource("3_advmd")
+shader_parameter/continentalness_scale = 1.0
+shader_parameter/continentalness_power = 1.0
+shader_parameter/continentalness2_scale = 1.0
+shader_parameter/continentalness2_power = 1.0
+shader_parameter/continentalness_picker_scale = 1.0
+shader_parameter/continentalness_picker_power = 1.0
+shader_parameter/continentalness_final_scale = 1.0
+shader_parameter/continentalness_final_power = 1.0
+shader_parameter/continentalness_final_sea_level_value = 0.5
+shader_parameter/rotation = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_exxxe"]
+resource_local_to_scene = true
+
+[node name="ContinentalnessFinalHeightmapProviderDisplay" instance=ExtResource("1_e2iam")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1182.0
+offset_bottom = 840.0
+grow_horizontal = 1
+grow_vertical = 1
+script = ExtResource("2_exxxe")
+
+[node name="NoiseTextureRect" parent="NoiseTextureControl" index="0"]
+material = SubResource("ShaderMaterial_kbaeq")
+texture = SubResource("CanvasTexture_exxxe")
+
+[node name="Label" parent="." index="1"]
+text = "Continentalness Final"
+
+[node name="ScaleSliderControl" parent="." index="2"]
+anchor_left = 0.313239
+anchor_right = 0.609024

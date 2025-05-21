@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bpb7wntmxisb5" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/heightmap_provider_display.gd" id="1_i6yqe"]
 [ext_resource type="Script" uid="uid://cfb5thqjiy2j5" path="res://addons/tnowe_extra_controls/elements/properties_box.gd" id="2_34jjg"]
-[ext_resource type="Shader" uid="uid://c4pslhgv50ppb" path="res://Source/Shaders/heightmap_display.gdshader" id="2_eg7dd"]
+[ext_resource type="Shader" uid="uid://lmc8gyx8txei" path="res://Source/Shaders/continentalness_heightmap_display.gdshader" id="2_eg7dd"]
 [ext_resource type="Theme" uid="uid://c3778lnlhqkpv" path="res://Assets/Themes/CurveEditorTheme.tres" id="3_1sgno"]
 [ext_resource type="Script" uid="uid://b1l0ybaco5mjl" path="res://Source/Libraries/curve_editor.gd" id="3_xqjhv"]
 
@@ -13,7 +13,8 @@ shader_parameter/power = 0.0
 shader_parameter/sea_level_value = 0.5
 shader_parameter/rotation = 0.0
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_otqfj"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_eg7dd"]
+resource_local_to_scene = true
 
 [node name="HeightmapProviderDisplay" type="Control"]
 custom_minimum_size = Vector2(1182, 840)
@@ -46,7 +47,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("CanvasTexture_otqfj")
+texture = SubResource("CanvasTexture_eg7dd")
 expand_mode = 3
 
 [node name="ColorRect" type="ColorRect" parent="NoiseTextureControl"]
