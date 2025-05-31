@@ -16,7 +16,10 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 		Air = 0,
 		Stone = 1,
 		Grass = 2,
-		FullWater = 3
+		FullWater = 3,
+		TreeTrunk = 4,
+		TreeLeaves = 5,
+		Sand = 6
 	}
 
 	private const VoxelBuffer.ChannelId Channel = VoxelBuffer.ChannelId.ChannelType;
@@ -72,21 +75,41 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 
 				for (Int32 x = 0; x < blockSize; x++)
 				{
+					//Tuple<Int64, Double> tuple = GetHeightValueTupleAt(groundX, groundZ);
+					//Int64 height = tuple.Item1;
+					//Double heightValue = tuple.Item2;
 					Int64 height = GetHeightAt(groundX, groundZ);
+					Double heightValue = GetValueFromHeight(height) ?? 0;
+					
 					Int64 relativeHeight = height - originY;
+					Double sandProbabilityRandomNumber = randomNumberGenerator.Randf();
+					//Double stoneProbabilityRandomNumber = randomNumberGenerator.Randf();
+
+					WorldVoxelGenerator.Blocks blockToPlace = Blocks.Grass;
+					WorldVoxelGenerator.Blocks altBlockToPlace = Blocks.Stone;
+
+					if (sandProbabilityRandomNumber < GetSandValueAt(heightValue))
+					{
+						blockToPlace = Blocks.Sand;
+						altBlockToPlace = Blocks.Sand;
+					} 
+					/*else if (stoneProbabilityRandomNumber < GetStoneValueAt(heightValue))
+					{
+						blockToPlace = Blocks.Stone;
+					}*/
 					
 					// Dirt and grass
 
 					if (relativeHeight > blockSize)
 					{
-						outBuffer.FillArea((Int32)Blocks.Stone, new Vector3I(x, 0, z), new Vector3I(x + 1, blockSize, z + 1), (Int32)Channel);
+						outBuffer.FillArea((UInt64)altBlockToPlace, new Vector3I(x, 0, z), new Vector3I(x + 1, blockSize, z + 1), (Int32)Channel);
 					}
 					else if (relativeHeight > 0)
 					{
-						outBuffer.FillArea((Int32)Blocks.Stone, new Vector3I(x, 0, z), new Vector3I(x + 1, (Int32)relativeHeight, z + 1), (Int32)Channel);
+						outBuffer.FillArea((UInt64)altBlockToPlace, new Vector3I(x, 0, z), new Vector3I(x + 1, (Int32)relativeHeight, z + 1), (Int32)Channel);
 						if (height >= worldGenerationSettingsProvider.Resource.WorldGenerationSettings.SeaLevelY)
 						{
-							outBuffer.SetVoxel((Int32)Blocks.Grass, x, (Int32)relativeHeight - 1, z, (Int32)Channel);
+							outBuffer.SetVoxel((UInt64)blockToPlace, x, (Int32)relativeHeight - 1, z, (Int32)Channel);
 							if (relativeHeight < blockSize && randomNumberGenerator.Randf() < 0.2)
 							{
 								// Trees
@@ -102,11 +125,11 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 						{
 							startRelativeHeight = relativeHeight;
 						}
-						outBuffer.FillArea((Int32)Blocks.FullWater, new Vector3I(x, (Int32)startRelativeHeight, z), new Vector3I(x + 1, blockSize, z + 1), (Int32)Channel);
+						/*outBuffer.FillArea((Int32)Blocks.FullWater, new Vector3I(x, (Int32)startRelativeHeight, z), new Vector3I(x + 1, blockSize, z + 1), (Int32)Channel);
 						if (originY + blockSize == worldGenerationSettingsProvider.Resource.WorldGenerationSettings.SeaLevelY)
 						{
 							outBuffer.SetVoxel((Int32)Blocks.FullWater, x, blockSize - 1, z, (Int32)Channel);
-						}
+						}*/
 					}
 
 					groundX += 1;
@@ -125,5 +148,26 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 	private Int64 GetHeightAt(Int64 x, Int64 z)
 	{
 		return worldHeightmapProvider?.HeightmapSettings.GetHeightAt(x, z) ?? 0;
+	}
+	
+	private Tuple<Int64, Double> GetHeightValueTupleAt(Int64 x, Int64 z)
+	{
+		return worldHeightmapProvider?.HeightmapSettings.GetHeightValueTupleAt(x, z) ?? new Tuple<Int64, Double>(0, 0);
+	}
+
+	private Double? GetValueFromHeight(Int64 height)
+	{
+		return (Double?)(height - worldGenerationSettingsProvider?.Resource.WorldGenerationSettings.HeightmapMinY) /
+		       worldGenerationSettingsProvider?.Resource.WorldGenerationSettings.HeightmapRange;
+	}
+	
+	private Double GetSandValueAt(Double heightValue)
+	{
+		return worldGenerationSettingsProvider?.Resource.WorldGenerationSettings.SandCurve?.Sample((Single)heightValue) ?? 0;
+	}
+	
+	private Double GetStoneValueAt(Double heightValue)
+	{
+		return worldGenerationSettingsProvider?.Resource.WorldGenerationSettings.StoneCurve?.Sample((Single)heightValue) ?? 0;
 	}
 }

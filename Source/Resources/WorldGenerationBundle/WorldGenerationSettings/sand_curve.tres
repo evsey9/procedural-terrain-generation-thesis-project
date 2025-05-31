@@ -1,0 +1,8 @@
+[gd_resource type="Curve" format=3 uid="uid://d3xqxp36exjut"]
+
+[resource]
+bake_resolution = 300
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 1, Vector2(0.415385, 0), 0.0, 0.0, 0, 0, Vector2(0.430779, 1), 0.0, 0.0, 0, 0, Vector2(0.630769, 1), 0.0, 0.0, 0, 0, Vector2(0.646154, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 1, 0]
+point_count = 6
+metadata/_snap_enabled = true
+metadata/_snap_count = 65

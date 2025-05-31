@@ -31,7 +31,7 @@ public partial class ContinentalnessFinalHeightmapSettings : HeightmapSettings
 			Double continentalness2Value = WorldGenerationBundle.Continentalness2HeightmapSettings.GetValueAt(x, z);
 			Double continentalnessPickerValue = WorldGenerationBundle.ContinentalnessPickerHeightmapSettings.GetValueAt(x, z);
 			Double value = Double.Lerp(continentalnessValue, continentalness2Value, continentalnessPickerValue);
-			return Curve.SampleBaked((Single)Math.Pow(value, Power)) * ContributionCurve.SampleBaked((Single)value);
+			return Curve.Sample((Single)Math.Pow(value, Power)) * ContributionCurve.Sample((Single)value);
 		}
 		return 0;
 	}

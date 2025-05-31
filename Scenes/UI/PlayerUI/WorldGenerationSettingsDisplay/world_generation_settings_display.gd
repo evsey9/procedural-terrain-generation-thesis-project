@@ -24,8 +24,8 @@ func setup_properties() -> void:
 	properties_box.end_group()
 
 func setup_curves() -> void:
-	curve_editor.set_curve(ContinentalnessHeightmapProvider.HeightmapSettings.PreviewCurve)
-	contribution_curve_editor.set_curve(ContinentalnessHeightmapProvider.HeightmapSettings.PreviewContributionCurve)
+	curve_editor.set_curve(WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.SandCurve)
+	contribution_curve_editor.set_curve(WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.StoneCurve)
 	$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.hide()
 
 func _on_player_ui_enabled() -> void:
@@ -77,12 +77,12 @@ func update_all_info():
 
 func _on_curve_editor_curve_changed(curve: Curve) -> void:
 	properties_changed()
-	$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.show()
+	#$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.show()
 
 
 func _on_contribution_curve_editor_curve_changed(curve: Curve) -> void:
 	properties_changed()
-	$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.show()
+	#$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.show()
 
 
 func _on_bake_button_pressed() -> void:
@@ -90,7 +90,8 @@ func _on_bake_button_pressed() -> void:
 	$CurveControl/HBoxContainer/RotatedLabelNode/CurvesUnbakedWarning.hide()
 
 func properties_changed() -> void:
-	get_new_noise_texture()
+	#get_new_noise_texture()
+	WorldGenerationSettingsProvider.Resource.ChangeSettings()
 
 func children_heightmap_properties_changed() -> void:
 	get_new_noise_texture()

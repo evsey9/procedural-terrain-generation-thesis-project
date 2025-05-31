@@ -77,6 +77,16 @@ public partial class HeightmapSettings : Resource
 	{
 		return (Int32)(GetValueAt(x, z) * WorldGenerationBundle.WorldGenerationSettings.HeightmapRange) + WorldGenerationBundle.WorldGenerationSettings.HeightmapMinY;
 	}
+	
+	public Tuple<Int64, Double> GetHeightValueTupleAt(Double x, Double z)
+	{
+		Double heightValue = GetValueAt(x, z);
+		return new Tuple<Int64, Double>(
+			(Int64)(heightValue * WorldGenerationBundle.WorldGenerationSettings.HeightmapRange) + WorldGenerationBundle.WorldGenerationSettings.HeightmapMinY,
+			heightValue
+			);
+			
+	}
 
 	protected virtual void Initialize()
 	{

@@ -1,9 +1,44 @@
-[gd_resource type="VoxelBlockyModelCube" load_steps=2 format=3 uid="uid://t37ye6eji0q4"]
+[gd_resource type="VoxelBlockyModelCube" load_steps=3 format=3 uid="uid://t37ye6eji0q4"]
 
-[ext_resource type="Material" uid="uid://cvbgf63oaxwqv" path="res://Assets/Materials/Blocks/Water.tres" id="1_gsibn"]
+[ext_resource type="Shader" uid="uid://c3d638behmwd8" path="res://addons/transparentwater/shaders/water.gdshader" id="1_gsibn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dj7bp"]
+render_priority = 0
+shader = ExtResource("1_gsibn")
+shader_parameter/color_shallow = Color(0.01, 0.2, 0.3, 1)
+shader_parameter/color_deep = Color(0.3, 0.5, 0.6, 1)
+shader_parameter/transparency = 0.6
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.25
+shader_parameter/max_visible_depth = 20.0
+shader_parameter/wave_move_direction_a = Vector2(-1, 0)
+shader_parameter/wave_move_direction_b = Vector2(0, 1)
+shader_parameter/wave_noise_scale_a = 15.0
+shader_parameter/wave_noise_scale_b = 15.0
+shader_parameter/wave_time_scale_a = 0.15
+shader_parameter/wave_time_scale_b = 0.15
+shader_parameter/wave_height_scale = 1.0
+shader_parameter/wave_normal_flatness = 50.0
+shader_parameter/surface_normals_move_direction_a = Vector2(-1, 0.2)
+shader_parameter/surface_normals_move_direction_b = Vector2(0.2, 1)
+shader_parameter/surface_texture_roughness = 0.15
+shader_parameter/surface_texture_scale = 0.1
+shader_parameter/surface_texture_time_scale = 0.06
+shader_parameter/ssr_resolution = 1.0
+shader_parameter/ssr_max_travel = 30.0
+shader_parameter/ssr_max_diff = 4.0
+shader_parameter/ssr_mix_strength = 0.7
+shader_parameter/ssr_screen_border_fadeout = 0.3
+shader_parameter/refraction_intensity = 0.4
+shader_parameter/border_color = Color(1, 1, 1, 1)
+shader_parameter/border_scale = 2.0
+shader_parameter/border_near = 0.5
+shader_parameter/border_far = 300.0
+shader_parameter/cut_out_x = 0.0
+shader_parameter/cut_out_z = 0.0
 
 [resource]
-material_override_0 = ExtResource("1_gsibn")
+material_override_0 = SubResource("ShaderMaterial_dj7bp")
 atlas_size_in_tiles = Vector2i(3, 2)
 mesh_ortho_rotation_index = 10
 tile_left = Vector2i(1, 0)

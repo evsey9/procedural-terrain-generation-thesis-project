@@ -13,6 +13,8 @@ public partial class WorldGenerationSettings : Resource
 	public Double DefaultHorizontalScale { get; set; } = 1.0;
 	public Int32 DefaultTreesMinY { get; set; } = 0;
 	public Int32 DefaultTreesMaxY { get; set; } = 0;
+	public Curve? DefaultSandCurve { get; set; }
+	public Curve? DefaultStoneCurve { get; set; }
 	
 	#endregion
 	
@@ -24,6 +26,8 @@ public partial class WorldGenerationSettings : Resource
 	public Double HorizontalScale	{ get; set; }
 	public Int32 TreesMinY	{ get; set; }
 	public Int32 TreesMaxY	{ get; set; }
+	public Curve? SandCurve { get; set; }
+	public Curve? StoneCurve { get; set; }
 	
 	#endregion
 	
@@ -43,6 +47,10 @@ public partial class WorldGenerationSettings : Resource
 	
 	public WorldGenerationSettings() : base()
 	{
+		DefaultSandCurve = GD.Load<Curve>(
+			"res://Source/Resources/WorldGenerationBundle/WorldGenerationSettings/sand_curve.tres");
+		DefaultStoneCurve = GD.Load<Curve>(
+			"res://Source/Resources/WorldGenerationBundle/WorldGenerationSettings/stone_curve.tres");
 		Reset();
 	}
 	
@@ -54,6 +62,16 @@ public partial class WorldGenerationSettings : Resource
 		HorizontalScale = DefaultHorizontalScale;
 		TreesMinY = DefaultTreesMinY;
 		TreesMaxY = DefaultTreesMaxY;
+		
+		SandCurve = (Curve?)DefaultSandCurve?.Duplicate();
+		StoneCurve = (Curve?)DefaultStoneCurve?.Duplicate();
+		
+		if (SandCurve is not null && StoneCurve is not null)
+		{
+			SandCurve.Bake();
+			StoneCurve.Bake();
+		}
+		
 		if (sendSignal)
 		{
 			EmitSignal(Resource.SignalName.Changed);
@@ -74,6 +92,8 @@ public partial class WorldGenerationSettings : Resource
 		DefaultHorizontalScale = saveData.DefaultHorizontalScale;
 		DefaultTreesMinY = saveData.DefaultTreesMinY;
 		DefaultTreesMaxY = saveData.DefaultTreesMaxY;
+		DefaultSandCurve = saveData.DefaultSandCurve;
+		DefaultStoneCurve = saveData.DefaultStoneCurve;
 		Reset(true);
 		EmitSignal(SignalName.Reloaded);
 	}

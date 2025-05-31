@@ -25,6 +25,12 @@ public partial class WorldGenerationSettings : Resource
 	[Export]
 	public Int32 DefaultTreesMaxY { get; set; } = 0;
 	
+	[Export]
+	public Curve? DefaultSandCurve { get; set; } = new Curve();
+	
+	[Export]
+	public Curve? DefaultStoneCurve { get; set; } = new Curve();
+	
 	#endregion
 
 	public WorldGenerationSettings()
@@ -40,5 +46,7 @@ public partial class WorldGenerationSettings : Resource
 		DefaultHorizontalScale = settings.HorizontalScale;
 		DefaultTreesMinY = settings.TreesMinY;
 		DefaultTreesMaxY = settings.TreesMaxY;
+		DefaultSandCurve = settings.SandCurve;
+		DefaultStoneCurve = settings.StoneCurve;
 	}
 }

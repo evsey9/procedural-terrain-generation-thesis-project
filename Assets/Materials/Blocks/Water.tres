@@ -5,7 +5,7 @@
 [resource]
 transparency = 1
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 0.517647)
+albedo_color = Color(1, 1, 0, 0.517647)
 albedo_texture = ExtResource("1_0gjnk")
 metallic_specular = 0.0
 subsurf_scatter_strength = 1.0

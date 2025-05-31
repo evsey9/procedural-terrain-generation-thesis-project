@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldGenerationBundle" load_steps=27 format=3 uid="uid://c2dw6gify532i"]
+[gd_resource type="Resource" script_class="WorldGenerationBundle" load_steps=29 format=3 uid="uid://c2dw6gify532i"]
 
 [ext_resource type="Script" uid="uid://bse0hoj65rjq8" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessHeightmapSettings/ContinentalnessHeightmapSettings.cs" id="1_6os5m"]
 [ext_resource type="Curve" uid="uid://dulah278hfhpu" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessHeightmapSettings/continentalness_contribution_curve_basic.tres" id="1_15gwo"]
@@ -10,18 +10,20 @@
 [ext_resource type="Curve" uid="uid://brg81p5ahgl3n" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessHeightmapSettings/continentalness_curve.tres" id="2_te25q"]
 [ext_resource type="FastNoiseLite" uid="uid://d2wl85bydjps4" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessHeightmapSettings/continentalness_noise.tres" id="3_airp2"]
 [ext_resource type="Script" uid="uid://bid68lg0hpiq4" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationSettings/WorldGenerationSettings.cs" id="3_i4wph"]
+[ext_resource type="FastNoiseLite" uid="uid://b6njulmeyjan5" path="res://Source/Resources/WorldGenerationBundle/Continentalness2HeightmapSettings/continentalness2_noise.tres" id="3_jr1my"]
 [ext_resource type="Script" uid="uid://ceb5ql3y2mwan" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationBundle.cs" id="4_15gwo"]
 [ext_resource type="Script" uid="uid://m6ytvkk2ngls" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/ContinentalnessPickerHeightmapSettings.cs" id="7_4vgnk"]
 [ext_resource type="Curve" uid="uid://cygxfedx7usfq" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/continentalness_picker_contribution_curve_basic.tres" id="9_v4rtl"]
 [ext_resource type="Curve" uid="uid://dhpdu1n04f7pc" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/continentalness_picker_curve_linear.tres" id="12_n1oc6"]
 [ext_resource type="Curve" uid="uid://cc1tdeofriux3" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessFinalHeightmapSettings/continentalness_final_contribution_curve_basic.tres" id="12_v4rtl"]
 [ext_resource type="Curve" uid="uid://dmqim4r881c5y" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessFinalHeightmapSettings/continentalness_final_curve.tres" id="13_n1oc6"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_kxnio"]
+[ext_resource type="FastNoiseLite" uid="uid://cangyoc31hs48" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/continentalness_picker_noise.tres" id="14_hu21x"]
+[ext_resource type="Curve" uid="uid://d3xqxp36exjut" path="res://Source/Resources/WorldGenerationBundle/WorldGenerationSettings/sand_curve.tres" id="17_jwu63"]
+[ext_resource type="Curve" uid="uid://lfv5kvgla635" path="res://Source/Resources/WorldGenerationBundle/WorldGenerationSettings/stone_curve.tres" id="18_kolwr"]
 
 [sub_resource type="Resource" id="Resource_n1oc6"]
 script = ExtResource("1_gi7pi")
-DefaultNoise = SubResource("FastNoiseLite_kxnio")
+DefaultNoise = ExtResource("3_jr1my")
 DefaultCurve = ExtResource("2_kxnio")
 DefaultContributionCurve = ExtResource("1_xqwj6")
 DefaultScale = 1.0
@@ -45,11 +47,9 @@ DefaultContributionCurve = ExtResource("1_15gwo")
 DefaultScale = 1.0
 DefaultPower = 1.5
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_y42vc"]
-
 [sub_resource type="Resource" id="Resource_xofi4"]
 script = ExtResource("7_4vgnk")
-DefaultNoise = SubResource("FastNoiseLite_y42vc")
+DefaultNoise = ExtResource("14_hu21x")
 DefaultCurve = ExtResource("12_n1oc6")
 DefaultContributionCurve = ExtResource("9_v4rtl")
 DefaultScale = 1.0
@@ -73,6 +73,8 @@ DefaultHeightmapMaxY = 128
 DefaultHorizontalScale = 1.0
 DefaultTreesMinY = 0
 DefaultTreesMaxY = 0
+DefaultSandCurve = ExtResource("17_jwu63")
+DefaultStoneCurve = ExtResource("18_kolwr")
 
 [resource]
 script = ExtResource("4_15gwo")

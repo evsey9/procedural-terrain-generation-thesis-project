@@ -1,11 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://7qafidkp0ity"]
+[gd_scene load_steps=32 format=3 uid="uid://7qafidkp0ity"]
 
 [ext_resource type="PackedScene" uid="uid://bw43t3snwl0gm" path="res://Scenes/Characters/CameraPlayer/CameraPlayer.tscn" id="4_yk1ad"]
+[ext_resource type="VoxelBlockyModelCube" uid="uid://cd7jpig2og36m" path="res://Assets/VoxelBlockyModels/TreeTrunk.tres" id="5_1qvxm"]
 [ext_resource type="VoxelBlockyModelCube" uid="uid://bglc46f5rflm3" path="res://Assets/VoxelBlockyModels/Stone.tres" id="5_mqpgb"]
 [ext_resource type="VoxelGeneratorScript" uid="uid://c7cvojig2t66" path="res://Source/VoxelGeneratorScripts/world_voxel_generator.tres" id="5_s105q"]
 [ext_resource type="VoxelBlockyModelCube" uid="uid://50emun8g00ec" path="res://Assets/VoxelBlockyModels/Grass.tres" id="6_s105q"]
+[ext_resource type="VoxelBlockyModelCube" uid="uid://44arcns4xyso" path="res://Assets/VoxelBlockyModels/TreeLeaves.tres" id="6_vp1vn"]
 [ext_resource type="Material" uid="uid://b43g1h0qcu3bm" path="res://Assets/Materials/Blocks/Base.tres" id="7_1qvxm"]
+[ext_resource type="VoxelBlockyModelCube" uid="uid://b37o5l240of7i" path="res://Assets/VoxelBlockyModels/Sand.tres" id="7_vp1vn"]
 [ext_resource type="Material" uid="uid://cvbgf63oaxwqv" path="res://Assets/Materials/Blocks/Water.tres" id="8_1qvxm"]
+[ext_resource type="Shader" uid="uid://c3d638behmwd8" path="res://addons/transparentwater/shaders/water.gdshader" id="10_vp1vn"]
+[ext_resource type="Script" uid="uid://cmeu601kqccb5" path="res://Scenes/Maps/OverworldMap/WaterSurface.cs" id="11_7dm1u"]
+[ext_resource type="Script" uid="uid://b5nk63206hgam" path="res://addons/camera_follower_3d.gd" id="12_vhh3k"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_yk1ad"]
 
@@ -38,13 +44,101 @@ fluid = SubResource("VoxelBlockyFluid_mqpgb")
 level = 255
 
 [sub_resource type="VoxelBlockyLibrary" id="VoxelBlockyLibrary_s105q"]
-models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_s105q"), ExtResource("5_mqpgb"), ExtResource("6_s105q"), SubResource("VoxelBlockyModelFluid_s105q")])
+models = Array[VoxelBlockyModel]([SubResource("VoxelBlockyModelEmpty_s105q"), ExtResource("5_mqpgb"), ExtResource("6_s105q"), SubResource("VoxelBlockyModelFluid_s105q"), ExtResource("5_1qvxm"), ExtResource("6_vp1vn"), ExtResource("7_vp1vn")])
 
 [sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_1qvxm"]
 library = SubResource("VoxelBlockyLibrary_s105q")
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm1u"]
 material = ExtResource("7_1qvxm")
+
+[sub_resource type="BoxMesh" id="BoxMesh_kfc67"]
+size = Vector3(1280, 0.2, 1280)
+subdivide_width = 1200
+subdivide_depth = 1200
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oeh35"]
+noise_type = 0
+frequency = 0.007
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bcpi7"]
+generate_mipmaps = false
+seamless = true
+seamless_blend_skirt = 0.5
+as_normal_map = true
+noise = SubResource("FastNoiseLite_oeh35")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rjqdy"]
+noise_type = 0
+frequency = 0.02
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r4a3k"]
+generate_mipmaps = false
+seamless = true
+seamless_blend_skirt = 0.5
+as_normal_map = true
+noise = SubResource("FastNoiseLite_rjqdy")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1sxo1"]
+frequency = 0.0005
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qdptp"]
+generate_mipmaps = false
+seamless = true
+seamless_blend_skirt = 0.5
+noise = SubResource("FastNoiseLite_1sxo1")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mlqtj"]
+noise_type = 3
+frequency = 0.0225
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w84gw"]
+generate_mipmaps = false
+seamless = true
+seamless_blend_skirt = 0.5
+noise = SubResource("FastNoiseLite_mlqtj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7qk2a"]
+render_priority = -128
+shader = ExtResource("10_vp1vn")
+shader_parameter/color_shallow = Color(0.01, 0.2, 0.3, 1)
+shader_parameter/color_deep = Color(0.3, 0.5, 0.6, 1)
+shader_parameter/transparency = 0.6
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.25
+shader_parameter/max_visible_depth = 20.0
+shader_parameter/wave_a = SubResource("NoiseTexture2D_qdptp")
+shader_parameter/wave_b = SubResource("NoiseTexture2D_w84gw")
+shader_parameter/wave_move_direction_a = Vector2(-1, 0)
+shader_parameter/wave_move_direction_b = Vector2(0, 1)
+shader_parameter/wave_noise_scale_a = 15.0
+shader_parameter/wave_noise_scale_b = 15.0
+shader_parameter/wave_time_scale_a = 0.15
+shader_parameter/wave_time_scale_b = 0.15
+shader_parameter/wave_height_scale = 1.0
+shader_parameter/wave_normal_flatness = 50.0
+shader_parameter/surface_normals_a = SubResource("NoiseTexture2D_bcpi7")
+shader_parameter/surface_normals_b = SubResource("NoiseTexture2D_r4a3k")
+shader_parameter/surface_normals_move_direction_a = Vector2(-1, 0.2)
+shader_parameter/surface_normals_move_direction_b = Vector2(0.2, 1)
+shader_parameter/surface_texture_roughness = 0.15
+shader_parameter/surface_texture_scale = 0.1
+shader_parameter/surface_texture_time_scale = 0.06
+shader_parameter/ssr_resolution = 1.0
+shader_parameter/ssr_max_travel = 30.0
+shader_parameter/ssr_max_diff = 4.0
+shader_parameter/ssr_mix_strength = 0.7
+shader_parameter/ssr_screen_border_fadeout = 0.3
+shader_parameter/refraction_intensity = 0.4
+shader_parameter/border_color = Color(1, 1, 1, 1)
+shader_parameter/border_scale = 2.0
+shader_parameter/border_near = 0.5
+shader_parameter/border_far = 300.0
+shader_parameter/cut_out_x = 0.0
+shader_parameter/cut_out_z = 0.0
 
 [node name="World" type="Node3D"]
 
@@ -69,3 +163,15 @@ mesh = SubResource("BoxMesh_7dm1u")
 
 [node name="CameraPlayer" parent="." instance=ExtResource("4_yk1ad")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 84, 0)
+
+[node name="WaterSurface" type="MeshInstance3D" parent="." groups=["water_surface"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.027, 64, -0.037)
+mesh = SubResource("BoxMesh_kfc67")
+surface_material_override/0 = SubResource("ShaderMaterial_7qk2a")
+script = ExtResource("11_7dm1u")
+
+[node name="CameraFollower3D" type="Node3D" parent="WaterSurface"]
+script = ExtResource("12_vhh3k")
+target_path = NodePath("..")
+snap = true
+snap_unit = 32.0
