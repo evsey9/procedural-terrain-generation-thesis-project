@@ -61,6 +61,15 @@ public class TreeGenerator
 		// Leaves
 
 		Vector3[] logPositions = voxels.Keys.ToArray();
+		
+		foreach (Vector3 logPos in logPositions)
+		{
+			Vector3 leafpos = logPos + new Vector3(0, 1, 0);
+			if (!voxels.ContainsKey(leafpos))
+			{
+				voxels.TryAdd(leafpos, LeavesType);
+			}
+		}
 
 		Random random = new Random((Int32)randomNumberGenerator.Seed);
 		random.Shuffle<Vector3>(logPositions);
