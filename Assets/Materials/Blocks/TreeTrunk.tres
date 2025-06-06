@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cqbpbmkg671p1"]
 
-[ext_resource type="Texture2D" uid="uid://4ns4qvl8mxb6" path="res://Assets/Textures/MinecraftBlocks/Base.png" id="1_x3kax"]
+[ext_resource type="Texture2D" uid="uid://ci00j6angci06" path="res://Assets/Textures/MinecraftBlocks/TreeTrunk.png" id="1_x3kax"]
 
 [resource]
 vertex_color_use_as_albedo = true

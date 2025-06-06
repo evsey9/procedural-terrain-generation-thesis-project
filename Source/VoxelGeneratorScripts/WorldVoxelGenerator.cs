@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 using ProceduralTerrainGenerationThesisProject.HeightmapProviders;
 using ProceduralTerrainGenerationThesisProject.Singletons;
+using ProceduralTerrainGenerationThesisProject.StructureGeneration;
 
 namespace ProceduralTerrainGenerationThesisProject.VoxelGeneratorScripts;
 
@@ -10,8 +12,10 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 	private WorldGenerationSettingsProvider? worldGenerationSettingsProvider;
 	private WorldHeightmapProvider? worldHeightmapProvider;
 	public Boolean WorldGenerationEnabled { get; set; } = true;
-
-	private enum Blocks
+	private IList<Structure> treeStructures = new List<Structure>();
+	public RandomNumberGenerator RandomNumberGeneratorSingleton = new RandomNumberGenerator();
+	
+	public enum Blocks
 	{
 		Air = 0,
 		Stone = 1,
@@ -21,12 +25,32 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 		TreeLeaves = 5,
 		Sand = 6
 	}
+	
+	private readonly Vector3[] mooreDirs = new Vector3[]
+	{
+		new Vector3(-1, 0, -1),
+		new Vector3(0, 0, -1),
+		new Vector3(1, 0, -1),
+		new Vector3(-1, 0, 0),
+		new Vector3(1, 0, 0),
+		new Vector3(-1, 0, 1),
+		new Vector3(0, 0, 1),
+		new Vector3(1, 0, 1)
+	};
 
 	private const VoxelBuffer.ChannelId Channel = VoxelBuffer.ChannelId.ChannelType;
 
 	public WorldVoxelGenerator() : base()
 	{
-		
+		RandomNumberGeneratorSingleton.Seed = 0;
+		TreeGenerator treeGenerator = new TreeGenerator(RandomNumberGeneratorSingleton);
+		treeGenerator.LogType = Blocks.TreeTrunk;
+		treeGenerator.LeavesType = Blocks.TreeLeaves;
+		for (int i = 0; i < 4096; i++)
+		{
+			Structure structure = treeGenerator.Generate();
+			treeStructures.Add(structure);
+		}
 	}
 	
 	public override void _GenerateBlock(VoxelBuffer outBuffer, Vector3I originInVoxels, Int32 lod)
@@ -55,7 +79,7 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 
 		if (originInVoxels.Y > worldGenerationSettingsProvider.Resource.WorldGenerationSettings.HeightmapMaxY)
 		{
-			outBuffer.Fill((Int32)Blocks.Air, (Int32)Channel);
+			//outBuffer.Fill((Int32)Blocks.Air, (Int32)Channel);
 		}
 		else if (originInVoxels.Y + blockSize < worldGenerationSettingsProvider.Resource.WorldGenerationSettings.HeightmapMinY)
 		{
@@ -138,11 +162,59 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 				groundZ += 1;
 			}
 		}
+		
+		// Trees
+
+		if (originInVoxels.Y <= worldGenerationSettingsProvider.Resource.WorldGenerationSettings.TreesMaxY &&
+		    originInVoxels.Y + blockSize >= worldGenerationSettingsProvider.Resource.WorldGenerationSettings.TreesMinY)
+		{
+			VoxelTool voxelTool = outBuffer.GetVoxelTool();
+			List<Tuple<Vector3, Structure>> structureInstances = new List<Tuple<Vector3, Structure>>();
+			
+			structureInstances.AddRange(getTreeInstancesInChunk(chunkPosition, originInVoxels, blockSize));
+			
+			Aabb blockAabb = new Aabb(new Vector3(), outBuffer.GetSize() + new Vector3I(1, 1, 1));
+
+			foreach (Vector3 dir in mooreDirs)
+			{
+				Vector3 ncpos = (chunkPosition + dir).Round();
+				structureInstances.AddRange(getTreeInstancesInChunk(ncpos, originInVoxels, blockSize));
+			}
+
+			foreach (Tuple<Vector3, Structure> structureTuple in structureInstances)
+			{
+				Vector3 pos = structureTuple.Item1;
+				Structure structure = structureTuple.Item2;
+				Vector3 lowerCornerPos = pos - structure.Offset;
+				Aabb aabb = new Aabb(lowerCornerPos, structure.VoxelBuffer.GetSize() + new Vector3I(1, 1, 1));
+
+				if (aabb.Intersects(blockAabb))
+				{
+					voxelTool.PasteMasked(
+						(Vector3I)lowerCornerPos,
+						structure.VoxelBuffer,
+						1 << (Int32)VoxelBuffer.ChannelId.ChannelType,
+						(Int32)VoxelBuffer.ChannelId.ChannelType,
+						(Int32)Blocks.Air
+						);
+				}
+			}
+		}
 	}
 
 	private static UInt64 GetChunkSeed2d(Vector3 chunkPosition)
 	{
-		return (UInt64)chunkPosition.X ^ (31 * (UInt64)chunkPosition.Z);
+		//return (UInt64)chunkPosition.X ^ (31 * (UInt64)chunkPosition.Z);
+		return (UInt64)HashCode.Combine(chunkPosition.X, chunkPosition.Z);
+	}
+	
+	private static UInt64 GetTreeChunkSeed2d(Vector3 chunkPosition)
+	{
+		//Vector3 twoDimensionalChunk = new Vector3(chunkPosition.X, 0, chunkPosition.Z);
+		return (UInt64)HashCode.Combine(chunkPosition.X, chunkPosition.Z);
+		UInt64 output = ((UInt64)chunkPosition.X * (UInt64)chunkPosition.Z) * ((UInt64)chunkPosition.X << 4) * ((UInt64)chunkPosition.Z << 8);
+		//GD.Print($"for chunk position ${chunkPosition} seed is {output}");
+		return output;
 	}
 
 	private Int64 GetHeightAt(Int64 x, Int64 z)
@@ -169,5 +241,27 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 	private Double GetStoneValueAt(Double heightValue)
 	{
 		return worldGenerationSettingsProvider?.Resource.WorldGenerationSettings.StoneCurve?.Sample((Single)heightValue) ?? 0;
+	}
+
+	private IList<Tuple<Vector3, Structure>> getTreeInstancesInChunk(Vector3 cpos, Vector3 offset, Int32 chunkSize)
+	{
+		RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+		randomNumberGenerator.Seed = GetTreeChunkSeed2d(cpos);
+		List<Tuple<Vector3, Structure>> treeInstances = new List<Tuple<Vector3, Structure>>();
+		for (Int32 i = 0; i < 4; i++)
+		{
+			Vector3 pos = new Vector3(randomNumberGenerator.Randi() % chunkSize, 0, randomNumberGenerator.Randi() % chunkSize);
+			pos += cpos * chunkSize;
+			pos.Y = GetHeightAt((Int64)pos.X, (Int64)pos.Z);
+
+			if (pos.Y > worldGenerationSettingsProvider?.Resource.WorldGenerationSettings.TreesMinY)
+			{
+				pos -= offset;
+				Int64 si = randomNumberGenerator.Randi() % treeStructures.Count;
+				treeInstances.Add(new Tuple<Vector3, Structure>(pos.Round(), treeStructures[(Int32)si]));
+			}
+		}
+
+		return treeInstances;
 	}
 }

@@ -146,11 +146,20 @@ shader_parameter/cut_out_z = 0.0
 environment = SubResource("Environment_ut1c4")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6.61169, 103.615, 9.64626)
+transform = Transform3D(0.866025, -5.85622e-09, 0.5, -0.5, -2.18557e-08, 0.866025, 5.85622e-09, -1, -2.18557e-08, -6.61169, 103.615, 9.64626)
+visible = false
+light_indirect_energy = 16.0
+shadow_enabled = true
+
+[node name="DirectionalLight3DAmbient" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -5.85622e-09, 0.5, -0.5, -2.18557e-08, 0.866025, 5.85622e-09, -1, -2.18557e-08, -6.61169, 103.615, 9.64626)
 light_energy = 16.0
+light_indirect_energy = 16.0
+shadow_enabled = true
 sky_mode = 2
 
 [node name="VoxelTerrain" type="VoxelTerrain" parent="." groups=["voxel_terrain"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 generator = ExtResource("5_s105q")
 mesher = SubResource("VoxelMesherBlocky_1qvxm")
 max_view_distance = 512

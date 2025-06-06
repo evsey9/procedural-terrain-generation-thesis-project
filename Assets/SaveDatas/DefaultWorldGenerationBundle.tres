@@ -71,8 +71,8 @@ DefaultSeaLevelY = 64
 DefaultHeightmapMinY = 0
 DefaultHeightmapMaxY = 128
 DefaultHorizontalScale = 1.0
-DefaultTreesMinY = 0
-DefaultTreesMaxY = 0
+DefaultTreesMinY = 82
+DefaultTreesMaxY = 128
 DefaultSandCurve = ExtResource("17_jwu63")
 DefaultStoneCurve = ExtResource("18_kolwr")
 
