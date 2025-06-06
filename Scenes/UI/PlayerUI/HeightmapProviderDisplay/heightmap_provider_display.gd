@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 func setup_properties() -> void:
 	properties_box.clear()
 	properties_box.add_group("Base")
-	properties_box.add_float("Scale", heightmap_provider.HeightmapSettings.Scale, 0.00001, 10, 0.01)
+	properties_box.add_float("Scale", heightmap_provider.HeightmapSettings.Scale, 0.00001, 16, 0.01)
 	properties_box.add_float("Period", 1 / heightmap_provider.HeightmapSettings.Noise.frequency, 0.1, 20000, 0.1)
 	properties_box.end_group()
 	properties_box.add_spacer(false)
@@ -47,7 +47,7 @@ func setup_properties() -> void:
 	properties_box.add_group("Additional")
 	properties_box.add_float("Power", heightmap_provider.HeightmapSettings.Power, 0.00001, 10, 0.01)
 	properties_box.end_group()
-	properties_box.add_float("Preview Zoom", heightmap_provider.HeightmapSettings.DisplayNoiseScale, 0.5, 100, 0.1)
+	properties_box.add_float("Preview Zoom", heightmap_provider.HeightmapSettings.DisplayNoiseScale, 0.1, 100, 0.1)
 
 func setup_curves() -> void:
 	curve_editor.set_curve(heightmap_provider.HeightmapSettings.PreviewCurve)

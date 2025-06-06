@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cko6vqrtclu0y"]
+
+[ext_resource type="PackedScene" uid="uid://djbiiqiwrejpa" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/heightmap_provider_display.tscn" id="1_41qam"]
+[ext_resource type="Script" uid="uid://cmbxj5x03vheh" path="res://Scenes/UI/PlayerUI/HeightmapProviderDisplay/Tree/tree_heightmap_provider_display.gd" id="2_jb7cb"]
+[ext_resource type="Shader" uid="uid://8msavy6wy2vc" path="res://Source/Shaders/tree_heightmap_display.gdshader" id="3_jb7cb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0igjh"]
+shader = ExtResource("3_jb7cb")
+shader_parameter/scale = 0.0
+shader_parameter/power = 0.0
+shader_parameter/sea_level_value = 0.5
+shader_parameter/rotation = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jb7cb"]
+resource_local_to_scene = true
+
+[node name="TreeHeightmapProviderDisplay" instance=ExtResource("1_41qam")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1182.0
+offset_bottom = 840.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 1
+script = ExtResource("2_jb7cb")
+
+[node name="NoiseTextureRect" parent="NoiseTextureControl" index="0"]
+material = SubResource("ShaderMaterial_0igjh")
+texture = SubResource("CanvasTexture_jb7cb")
+
+[node name="Label" parent="." index="1"]
+text = "Trees"
+
+[node name="ScaleSliderControl" parent="." index="2"]
+anchor_left = 0.313239
+anchor_right = 0.609024
+
+[node name="VBoxContainer" parent="CurveControl/HBoxContainer/VBoxContainer/SecondCurveControl" index="0"]
+visible = false

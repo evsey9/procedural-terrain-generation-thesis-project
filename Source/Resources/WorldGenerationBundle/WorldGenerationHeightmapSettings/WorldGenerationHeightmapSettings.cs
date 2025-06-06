@@ -22,7 +22,7 @@ public partial class WorldGenerationHeightmapSettings : HeightmapSettings
 	public override Int32 GetHeightAt(Double x, Double z)
 	{
 		//return (Int32)(WorldGenerationBundle.ContinentalnessHeightmapSettings.GetValueAt(x, z) * WorldGenerationBundle.WorldGenerationSettings.HeightmapRange) + WorldGenerationBundle.WorldGenerationSettings.HeightmapMinY;
-		return (Int32)(WorldGenerationBundle.ContinentalnessFinalHeightmapSettings.GetValueAt(x, z) * WorldGenerationBundle.WorldGenerationSettings.HeightmapRange) + WorldGenerationBundle.WorldGenerationSettings.HeightmapMinY;
+		return (Int32)(WorldGenerationBundle.ContinentalnessFinalHeightmapSettings.GetValueAt(x / WorldGenerationBundle.WorldGenerationSettings.HorizontalScale, z / WorldGenerationBundle.WorldGenerationSettings.HorizontalScale) * WorldGenerationBundle.WorldGenerationSettings.HeightmapRange) + WorldGenerationBundle.WorldGenerationSettings.HeightmapMinY;
 	}
 	
 	public void LoadFromSaveData(SaveData.WorldGenerationHeightmapSettings saveData)

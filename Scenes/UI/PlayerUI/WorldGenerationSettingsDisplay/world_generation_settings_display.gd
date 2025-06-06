@@ -23,6 +23,8 @@ func setup_properties() -> void:
 	properties_box.add_int("Heightmap Max Level", WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.HeightmapMaxY, -512, 512)
 	properties_box.add_int("Trees Min Level", WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.TreesMinY, -512, 512)
 	properties_box.add_int("Trees Max Level", WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.TreesMaxY, -512, 512)
+	properties_box.add_int("Trees Min Amount", WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.TreesMinAmount, 0, 256)
+	properties_box.add_int("Trees Max Amount", WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.TreesMaxAmount, 0, 256)
 	properties_box.end_group()
 
 func setup_curves() -> void:
@@ -56,6 +58,10 @@ func _on_properties_box_number_changed(key: StringName, new_value: float) -> voi
 			WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.TreesMinY = int(new_value)
 		"Trees Max Level":
 			WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.TreesMaxY = int(new_value)
+		"Trees Min Amount":
+			WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.TreesMinAmount = int(new_value)
+		"Trees Max Amount":
+			WorldGenerationSettingsProvider.Resource.WorldGenerationSettings.TreesMaxAmount = int(new_value)
 		_:
 			pass
 	properties_changed()

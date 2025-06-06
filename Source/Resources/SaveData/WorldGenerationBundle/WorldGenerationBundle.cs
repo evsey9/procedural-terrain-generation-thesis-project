@@ -23,6 +23,9 @@ public partial class WorldGenerationBundle : Resource
 	
 	[Export]
 	public WorldGenerationHeightmapSettings WorldGenerationHeightmapSettings { get; set; } = new WorldGenerationHeightmapSettings();
+	
+	[Export]
+	public TreeHeightmapSettings TreeHeightmapSettings { get; set; } = new TreeHeightmapSettings();
 
 	public WorldGenerationBundle()
 	{
@@ -37,5 +40,6 @@ public partial class WorldGenerationBundle : Resource
 		ContinentalnessPickerHeightmapSettings = new ContinentalnessPickerHeightmapSettings(bundle.ContinentalnessPickerHeightmapSettings);
 		ContinentalnessFinalHeightmapSettings = new ContinentalnessFinalHeightmapSettings(bundle.ContinentalnessFinalHeightmapSettings);
 		WorldGenerationHeightmapSettings = new WorldGenerationHeightmapSettings(bundle.WorldGenerationHeightmapSettings);
+		TreeHeightmapSettings = new TreeHeightmapSettings(bundle.TreeHeightmapSettings);
 	}
 }

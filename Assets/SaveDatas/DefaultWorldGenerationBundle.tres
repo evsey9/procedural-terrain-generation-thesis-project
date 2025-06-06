@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldGenerationBundle" load_steps=29 format=3 uid="uid://c2dw6gify532i"]
+[gd_resource type="Resource" script_class="WorldGenerationBundle" load_steps=34 format=3 uid="uid://c2dw6gify532i"]
 
 [ext_resource type="Script" uid="uid://bse0hoj65rjq8" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessHeightmapSettings/ContinentalnessHeightmapSettings.cs" id="1_6os5m"]
 [ext_resource type="Curve" uid="uid://dulah278hfhpu" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessHeightmapSettings/continentalness_contribution_curve_basic.tres" id="1_15gwo"]
@@ -18,8 +18,12 @@
 [ext_resource type="Curve" uid="uid://cc1tdeofriux3" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessFinalHeightmapSettings/continentalness_final_contribution_curve_basic.tres" id="12_v4rtl"]
 [ext_resource type="Curve" uid="uid://dmqim4r881c5y" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessFinalHeightmapSettings/continentalness_final_curve.tres" id="13_n1oc6"]
 [ext_resource type="FastNoiseLite" uid="uid://cangyoc31hs48" path="res://Source/Resources/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/continentalness_picker_noise.tres" id="14_hu21x"]
+[ext_resource type="Curve" uid="uid://ck5bc8ulr0ntg" path="res://Source/Resources/WorldGenerationBundle/TreeHeightmapSettings/tree_contribution_curve_basic.tres" id="16_y42vc"]
 [ext_resource type="Curve" uid="uid://d3xqxp36exjut" path="res://Source/Resources/WorldGenerationBundle/WorldGenerationSettings/sand_curve.tres" id="17_jwu63"]
+[ext_resource type="Curve" uid="uid://5wvv7oud4q4j" path="res://Source/Resources/WorldGenerationBundle/TreeHeightmapSettings/tree_curve.tres" id="17_xofi4"]
+[ext_resource type="FastNoiseLite" uid="uid://cnyufmsfi5scf" path="res://Source/Resources/WorldGenerationBundle/TreeHeightmapSettings/tree_noise.tres" id="18_1tqh0"]
 [ext_resource type="Curve" uid="uid://lfv5kvgla635" path="res://Source/Resources/WorldGenerationBundle/WorldGenerationSettings/stone_curve.tres" id="18_kolwr"]
+[ext_resource type="Script" uid="uid://dg0xk4r8oy3j5" path="res://Source/Resources/SaveData/WorldGenerationBundle/TreeHeightmapSettings/TreeHeightmapSettings.cs" id="19_588mu"]
 
 [sub_resource type="Resource" id="Resource_n1oc6"]
 script = ExtResource("1_gi7pi")
@@ -55,6 +59,14 @@ DefaultContributionCurve = ExtResource("9_v4rtl")
 DefaultScale = 1.0
 DefaultPower = 1.0
 
+[sub_resource type="Resource" id="Resource_q1ces"]
+script = ExtResource("19_588mu")
+DefaultNoise = ExtResource("18_1tqh0")
+DefaultCurve = ExtResource("17_xofi4")
+DefaultContributionCurve = ExtResource("16_y42vc")
+DefaultScale = 1.0
+DefaultPower = 1.0
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_r481m"]
 
 [sub_resource type="Resource" id="Resource_kxnio"]
@@ -84,4 +96,5 @@ Continentalness2HeightmapSettings = SubResource("Resource_n1oc6")
 ContinentalnessPickerHeightmapSettings = SubResource("Resource_xofi4")
 ContinentalnessFinalHeightmapSettings = SubResource("Resource_kolwr")
 WorldGenerationHeightmapSettings = SubResource("Resource_kxnio")
+TreeHeightmapSettings = SubResource("Resource_q1ces")
 metadata/_custom_type_script = "uid://ceb5ql3y2mwan"

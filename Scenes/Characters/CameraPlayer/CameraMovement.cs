@@ -14,6 +14,9 @@ public partial class CameraMovement : CharacterBody3D
 	[Export]
 	public Double SprintMultiplier { get; set; } = 2;
 	
+	[Export]
+	public Double Sprint2Multiplier { get; set; } = 20;
+	
 	#endregion
 	
 	#region Movement Actions
@@ -39,6 +42,9 @@ public partial class CameraMovement : CharacterBody3D
 	
 	[Export]
 	public String KeySprint { get; set; } = "sprint";
+	
+	[Export]
+	public String KeySprint2 { get; set; } = "sprint2";
 	
 	#endregion
 	
@@ -176,12 +182,13 @@ public partial class CameraMovement : CharacterBody3D
 		movementDirection = movementDirection.Normalized();
 
 		Double speedModifier = Input.IsActionPressed(KeySprint) ? SprintMultiplier : 1;
+		Double speed2Modifier = Input.IsActionPressed(KeySprint2) ? Sprint2Multiplier : 1;
 		
 		GlobalTranslate(
 			(Camera!.GlobalTransform.Basis.Z * -movementDirection.Z + 
 			 Camera!.GlobalTransform.Basis.X * movementDirection.X + 
 			 Vector3.Up * movementDirection.Y).Normalized() *
-			(Single)(MovementSpeed * speedModifier * deltaTime));
+			(Single)(MovementSpeed * speedModifier * speed2Modifier * deltaTime));
 	}
 
 	private void SetRotationTarget(Vector2 mouseMotion)

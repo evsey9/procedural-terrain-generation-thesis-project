@@ -13,6 +13,7 @@ public partial class WorldGenerationBundle : Resource
 	public ContinentalnessPickerHeightmapSettings ContinentalnessPickerHeightmapSettings { get; set; }
 	public ContinentalnessFinalHeightmapSettings ContinentalnessFinalHeightmapSettings { get; set; }
 	public WorldGenerationHeightmapSettings WorldGenerationHeightmapSettings { get; set; }
+	public TreeHeightmapSettings TreeHeightmapSettings { get; set; }
 	
 	#region Signals
 
@@ -31,6 +32,7 @@ public partial class WorldGenerationBundle : Resource
 		ContinentalnessPickerHeightmapSettings = new ContinentalnessPickerHeightmapSettings(this);
 		ContinentalnessFinalHeightmapSettings = new ContinentalnessFinalHeightmapSettings(this);
 		WorldGenerationHeightmapSettings = new WorldGenerationHeightmapSettings(this);
+		TreeHeightmapSettings = new TreeHeightmapSettings(this);
 		
 		WorldGenerationSettings.Changed += ChangeSettings;
 		ContinentalnessHeightmapSettings.Changed += ChangeSettings;
@@ -38,6 +40,7 @@ public partial class WorldGenerationBundle : Resource
 		ContinentalnessPickerHeightmapSettings.Changed += ChangeSettings;
 		ContinentalnessFinalHeightmapSettings.Changed += ChangeSettings;
 		WorldGenerationHeightmapSettings.Changed += ChangeSettings;
+		TreeHeightmapSettings.Changed += ChangeSettings;
 		
 		WorldGenerationSettings.Reloaded += Reload;
 		ContinentalnessHeightmapSettings.Reloaded += Reload;
@@ -45,6 +48,7 @@ public partial class WorldGenerationBundle : Resource
 		ContinentalnessPickerHeightmapSettings.Reloaded += Reload;
 		ContinentalnessFinalHeightmapSettings.Reloaded += Reload;
 		WorldGenerationHeightmapSettings.Reloaded += Reload;
+		TreeHeightmapSettings.Reloaded += Reload;
 	}
 	
 	public void ChangeSettings()
@@ -73,6 +77,7 @@ public partial class WorldGenerationBundle : Resource
 		ContinentalnessPickerHeightmapSettings.BakeCurves();
 		ContinentalnessFinalHeightmapSettings.BakeCurves();
 		//WorldGenerationHeightmapSettings.BakeCurves();
+		TreeHeightmapSettings.BakeCurves();
 	}
 
 	public void LoadFromSaveData(SaveData.WorldGenerationBundle saveData)
@@ -83,6 +88,7 @@ public partial class WorldGenerationBundle : Resource
 		ContinentalnessPickerHeightmapSettings.LoadFromSaveData(saveData.ContinentalnessPickerHeightmapSettings);
 		ContinentalnessFinalHeightmapSettings.LoadFromSaveData(saveData.ContinentalnessFinalHeightmapSettings);
 		WorldGenerationHeightmapSettings.LoadFromSaveData(saveData.WorldGenerationHeightmapSettings);
+		TreeHeightmapSettings.LoadFromSaveData(saveData.TreeHeightmapSettings);
 		EmitSignal(SignalName.Reloaded);
 	}
 }

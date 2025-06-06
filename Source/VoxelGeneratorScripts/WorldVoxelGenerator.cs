@@ -11,6 +11,7 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 {
 	private WorldGenerationSettingsProvider? worldGenerationSettingsProvider;
 	private WorldHeightmapProvider? worldHeightmapProvider;
+	private TreeHeightmapProvider? treeHeightmapProvider;
 	public Boolean WorldGenerationEnabled { get; set; } = true;
 	private IList<Structure> treeStructures = new List<Structure>();
 	public RandomNumberGenerator RandomNumberGeneratorSingleton = new RandomNumberGenerator();
@@ -55,13 +56,14 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 	
 	public override void _GenerateBlock(VoxelBuffer outBuffer, Vector3I originInVoxels, Int32 lod)
 	{
-		if (WorldGenerationSettingsProvider.Singleton is null || WorldHeightmapProvider.Singleton is null)
+		if (WorldGenerationSettingsProvider.Singleton is null || WorldHeightmapProvider.Singleton is null || TreeHeightmapProvider.Singleton is null)
 		{
 			return;
 		}
 
 		worldGenerationSettingsProvider ??= WorldGenerationSettingsProvider.Singleton;
 		worldHeightmapProvider ??= WorldHeightmapProvider.Singleton;
+		treeHeightmapProvider ??= TreeHeightmapProvider.Singleton;
 
 		if (!WorldGenerationEnabled)
 		{
@@ -226,6 +228,16 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 	{
 		return worldHeightmapProvider?.HeightmapSettings.GetHeightValueTupleAt(x, z) ?? new Tuple<Int64, Double>(0, 0);
 	}
+	
+	private Int64 GetTreeAmountAt(Int64 x, Int64 z)
+	{
+		Double treeValue = treeHeightmapProvider?.HeightmapSettings.GetValueAt(x, z) ?? 0;
+		return (Int64)Math.Round(
+			   worldGenerationSettingsProvider?.Resource.WorldGenerationSettings.TreesMinAmount +
+	           treeValue *
+	           (worldGenerationSettingsProvider?.Resource.WorldGenerationSettings.TreesMaxAmount -
+	            worldGenerationSettingsProvider?.Resource.WorldGenerationSettings.TreesMinAmount) ?? 0);
+	}
 
 	private Double? GetValueFromHeight(Int64 height)
 	{
@@ -248,7 +260,7 @@ public partial class WorldVoxelGenerator : VoxelGeneratorScript
 		RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 		randomNumberGenerator.Seed = GetTreeChunkSeed2d(cpos);
 		List<Tuple<Vector3, Structure>> treeInstances = new List<Tuple<Vector3, Structure>>();
-		for (Int32 i = 0; i < 4; i++)
+		for (Int32 i = 0; i < GetTreeAmountAt((Int64)cpos.X * chunkSize, (Int64)cpos.Z * chunkSize); i++)
 		{
 			Vector3 pos = new Vector3(randomNumberGenerator.Randi() % chunkSize, 0, randomNumberGenerator.Randi() % chunkSize);
 			pos += cpos * chunkSize;

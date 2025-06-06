@@ -13,6 +13,8 @@ public partial class WorldGenerationSettings : Resource
 	public Double DefaultHorizontalScale { get; set; } = 1.0;
 	public Int32 DefaultTreesMinY { get; set; } = 0;
 	public Int32 DefaultTreesMaxY { get; set; } = 0;
+	public Int32 DefaultTreesMinAmount { get; set; } = 0;
+	public Int32 DefaultTreesMaxAmount { get; set; } = 16;
 	public Curve? DefaultSandCurve { get; set; }
 	public Curve? DefaultStoneCurve { get; set; }
 	
@@ -26,6 +28,8 @@ public partial class WorldGenerationSettings : Resource
 	public Double HorizontalScale	{ get; set; }
 	public Int32 TreesMinY	{ get; set; }
 	public Int32 TreesMaxY	{ get; set; }
+	public Int32 TreesMinAmount	{ get; set; }
+	public Int32 TreesMaxAmount	{ get; set; }
 	public Curve? SandCurve { get; set; }
 	public Curve? StoneCurve { get; set; }
 	
@@ -62,6 +66,8 @@ public partial class WorldGenerationSettings : Resource
 		HorizontalScale = DefaultHorizontalScale;
 		TreesMinY = DefaultTreesMinY;
 		TreesMaxY = DefaultTreesMaxY;
+		TreesMinAmount = DefaultTreesMinAmount;
+		TreesMaxAmount = DefaultTreesMaxAmount;
 		
 		SandCurve = (Curve?)DefaultSandCurve?.Duplicate();
 		StoneCurve = (Curve?)DefaultStoneCurve?.Duplicate();

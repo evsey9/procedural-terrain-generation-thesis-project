@@ -12,7 +12,7 @@ public partial class HeightmapProvider : Node
 	
 	public HeightmapSettings HeightmapSettings { get; protected set; } = null!;
 	
-	private Node3D? Player { get; set; }
+	protected Node3D? Player { get; set; }
 
 	public static HeightmapProvider? Singleton { get; private set; }
 	
