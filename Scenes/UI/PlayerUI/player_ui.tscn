@@ -69,4 +69,3 @@ size_flags_horizontal = 1
 
 [node name="TreeHeightmapProviderDisplay2" parent="Control/Panel/ScrollContainer/VBoxContainer" groups=["heightmap_provider_displays"] instance=ExtResource("7_netf4")]
 layout_mode = 2
-size_flags_horizontal = 1

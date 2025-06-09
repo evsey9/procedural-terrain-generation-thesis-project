@@ -159,7 +159,6 @@ shadow_enabled = true
 sky_mode = 2
 
 [node name="VoxelTerrain" type="VoxelTerrain" parent="." groups=["voxel_terrain"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 generator = ExtResource("5_s105q")
 mesher = SubResource("VoxelMesherBlocky_1qvxm")
 max_view_distance = 512
