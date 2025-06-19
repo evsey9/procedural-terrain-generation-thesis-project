@@ -162,6 +162,11 @@ public partial class CameraMovement : CharacterBody3D
 		MouseCaptured = mouseCaptured;
 		Input.SetMouseMode(MouseCaptured ? Input.MouseModeEnum.Captured : Input.MouseModeEnum.Visible);
 	}
+	
+	protected void SwitchFullscreen(Boolean fullscreen)
+	{
+		DisplayServer.WindowSetMode(fullscreen ? DisplayServer.WindowMode.ExclusiveFullscreen : DisplayServer.WindowMode.Maximized);
+	}
 
 	private void HandleInput(Double deltaTime)
 	{

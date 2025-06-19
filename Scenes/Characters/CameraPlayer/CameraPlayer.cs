@@ -66,6 +66,11 @@ public partial class CameraPlayer : CameraMovement
 			SwitchMouseCaptured(false);
 			SettingsLoadDialog.Show();
 		}
+		
+		if (@event.IsActionPressed("fullscreen"))
+		{
+			SwitchFullscreen(DisplayServer.WindowGetMode() != DisplayServer.WindowMode.ExclusiveFullscreen);
+		}
 	}
 
 	private void SettingsSaveDialogFileSelectedEventHandler(String filePath)
