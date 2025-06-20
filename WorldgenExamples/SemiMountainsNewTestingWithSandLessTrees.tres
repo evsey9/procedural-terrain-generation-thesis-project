@@ -1,0 +1,174 @@
+[gd_resource type="Resource" script_class="WorldGenerationBundle" load_steps=36 format=3]
+
+[ext_resource type="Script" path="res://Source/Resources/SaveData/WorldGenerationBundle/Continentalness2HeightmapSettings/Continentalness2HeightmapSettings.cs" id="1_r6gx0"]
+[ext_resource type="Script" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessFinalHeightmapSettings/ContinentalnessFinalHeightmapSettings.cs" id="2_i6267"]
+[ext_resource type="Script" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessHeightmapSettings/ContinentalnessHeightmapSettings.cs" id="3_2bcvb"]
+[ext_resource type="Script" path="res://Source/Resources/SaveData/WorldGenerationBundle/ContinentalnessPickerHeightmapSettings/ContinentalnessPickerHeightmapSettings.cs" id="4_87y85"]
+[ext_resource type="Script" path="res://Source/Resources/SaveData/WorldGenerationBundle/TreeHeightmapSettings/TreeHeightmapSettings.cs" id="5_5dbrf"]
+[ext_resource type="Script" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationHeightmapSettings/WorldGenerationHeightmapSettings.cs" id="6_jtrre"]
+[ext_resource type="Script" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationSettings/WorldGenerationSettings.cs" id="7_qu3rl"]
+[ext_resource type="Script" path="res://Source/Resources/SaveData/WorldGenerationBundle/WorldGenerationBundle.cs" id="8_fylet"]
+
+[sub_resource type="Curve" id="Curve_1wvgf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.476863, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_vv20u"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.599052, 0.277702), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mu0ou"]
+
+[sub_resource type="Resource" id="Resource_abt7l"]
+script = ExtResource("1_r6gx0")
+DefaultNoise = SubResource("FastNoiseLite_mu0ou")
+DefaultCurve = SubResource("Curve_vv20u")
+DefaultContributionCurve = SubResource("Curve_1wvgf")
+DefaultScale = 0.07001
+DefaultPower = 1.0
+
+[sub_resource type="Curve" id="Curve_jpghl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.442443, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3ugud"]
+_data = [Vector2(0.000150919, 0), 0.0, 0.998797, 0, 0, Vector2(1, 1), 0.998918, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oiv70"]
+fractal_gain = 0.51
+
+[sub_resource type="Resource" id="Resource_qpbuj"]
+script = ExtResource("2_i6267")
+DefaultNoise = SubResource("FastNoiseLite_oiv70")
+DefaultCurve = SubResource("Curve_3ugud")
+DefaultContributionCurve = SubResource("Curve_jpghl")
+DefaultScale = 1.0
+DefaultPower = 1.00001
+
+[sub_resource type="Curve" id="Curve_5gpqu"]
+bake_resolution = 300
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+metadata/_snap_count = 65
+
+[sub_resource type="Curve" id="Curve_83322"]
+bake_resolution = 300
+_data = [Vector2(0.000150919, 1), 0.0, 0.0, 0, 0, Vector2(0.046, 0.077), 0.0, 0.0, 0, 0, Vector2(0.222158, 0.224873), 0.0, 0.0, 0, 0, Vector2(0.364999, 0.302861), 0.0, 0.0, 0, 0, Vector2(0.519887, 0.387349), 0.335677, 0.335677, 0, 0, Vector2(0.623146, 0.527079), 0.828955, 0.828955, 0, 0, Vector2(0.731568, 0.556324), 0.472047, 0.472047, 0, 0, Vector2(0.867525, 0.68493), 1.3487, 1.3487, 0, 0, Vector2(1, 0.983887), 0.0, 0.0, 0, 0]
+point_count = 9
+metadata/_snap_enabled = true
+metadata/_snap_count = 65
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_srmya"]
+seed = 1337
+frequency = 0.003
+fractal_octaves = 8
+fractal_lacunarity = 2.5
+fractal_weighted_strength = 0.5
+domain_warp_enabled = true
+domain_warp_amplitude = 8.5
+domain_warp_frequency = 0.012
+domain_warp_fractal_type = 0
+
+[sub_resource type="Resource" id="Resource_xg134"]
+script = ExtResource("3_2bcvb")
+DefaultNoise = SubResource("FastNoiseLite_srmya")
+DefaultCurve = SubResource("Curve_83322")
+DefaultContributionCurve = SubResource("Curve_5gpqu")
+DefaultScale = 0.17001
+DefaultPower = 1.52001
+
+[sub_resource type="Curve" id="Curve_xb7xu"]
+_data = [Vector2(0.132667, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_mt0yr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.161923, 0.112382), 0.0, 0.0, 0, 0, Vector2(0.568075, 0.0863856), 0.0, 0.0, 0, 0, Vector2(0.75222, 0.499076), 0.0, 0.0, 0, 0, Vector2(0.8572, 0.609559), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yjqt7"]
+
+[sub_resource type="Resource" id="Resource_hau5d"]
+script = ExtResource("4_87y85")
+DefaultNoise = SubResource("FastNoiseLite_yjqt7")
+DefaultCurve = SubResource("Curve_mt0yr")
+DefaultContributionCurve = SubResource("Curve_xb7xu")
+DefaultScale = 1.0
+DefaultPower = 0.96001
+
+[sub_resource type="Curve" id="Curve_otmtf"]
+bake_resolution = 300
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+metadata/_snap_count = 65
+
+[sub_resource type="Curve" id="Curve_c2ka6"]
+bake_resolution = 300
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.046, 0.077), 0.0, 0.0, 0, 0, Vector2(0.262, 0.077), 0.0, 0.0, 0, 0, Vector2(0.4, 0.215385), 0.0, 0.0, 0, 0, Vector2(0.508, 0.431), 0.0, 0.0, 0, 0, Vector2(0.655845, 0.536827), 0.726224, 0.726224, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 7
+metadata/_snap_enabled = true
+metadata/_snap_count = 65
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_swa10"]
+seed = 63443
+frequency = 0.003
+fractal_octaves = 8
+fractal_lacunarity = 2.5
+fractal_weighted_strength = 0.5
+domain_warp_enabled = true
+domain_warp_amplitude = 8.5
+domain_warp_frequency = 0.012
+domain_warp_fractal_type = 0
+
+[sub_resource type="Resource" id="Resource_d8y7l"]
+script = ExtResource("5_5dbrf")
+DefaultNoise = SubResource("FastNoiseLite_swa10")
+DefaultCurve = SubResource("Curve_c2ka6")
+DefaultContributionCurve = SubResource("Curve_otmtf")
+DefaultScale = 0.46001
+DefaultPower = 1.0
+
+[sub_resource type="Curve" id="Curve_cimn2"]
+
+[sub_resource type="Curve" id="Curve_ph3ea"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b1wit"]
+
+[sub_resource type="Resource" id="Resource_c4jf6"]
+script = ExtResource("6_jtrre")
+DefaultNoise = SubResource("FastNoiseLite_b1wit")
+DefaultCurve = SubResource("Curve_ph3ea")
+DefaultContributionCurve = SubResource("Curve_cimn2")
+DefaultScale = 1.0
+DefaultPower = 1.0
+
+[sub_resource type="Curve" id="Curve_36iid"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0896421, 0), 0.0, 0.0, 0, 0, Vector2(0.113736, 1), 0.0, 0.0, 0, 0, Vector2(0.294439, 1), 0.0, 0.0, 0, 0, Vector2(0.29616, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_nse0n"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.466537, 0), 0.0, 0.0, 0, 0, Vector2(0.736731, 1), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Resource" id="Resource_scnrc"]
+script = ExtResource("7_qu3rl")
+DefaultSeaLevelY = -224
+DefaultHeightmapMinY = -512
+DefaultHeightmapMaxY = 512
+DefaultHorizontalScale = 1.0
+DefaultTreesMinY = -210
+DefaultTreesMaxY = 512
+DefaultSandCurve = SubResource("Curve_36iid")
+DefaultStoneCurve = SubResource("Curve_nse0n")
+
+[resource]
+script = ExtResource("8_fylet")
+WorldGenerationSettings = SubResource("Resource_scnrc")
+ContinentalnessHeightmapSettings = SubResource("Resource_xg134")
+Continentalness2HeightmapSettings = SubResource("Resource_abt7l")
+ContinentalnessPickerHeightmapSettings = SubResource("Resource_hau5d")
+ContinentalnessFinalHeightmapSettings = SubResource("Resource_qpbuj")
+WorldGenerationHeightmapSettings = SubResource("Resource_c4jf6")
+TreeHeightmapSettings = SubResource("Resource_d8y7l")
