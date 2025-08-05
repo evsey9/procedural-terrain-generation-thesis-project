@@ -1,3 +1,6 @@
+![](img/Long.mp4)
+![](img/Short.mp4)
+
 # Procedural Terrain Generation Thesis Project
 
 Requires GodotVoxel.
